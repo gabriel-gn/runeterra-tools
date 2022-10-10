@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc",
+    "deploy-npm": "npm publish --access=public"
   },
   "devDependencies": {
     "@types/expect": "^24.3.0",
