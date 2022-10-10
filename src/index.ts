@@ -1,1 +1,1 @@
-// export * from './card-utils/models';
+export * from './validators/deck-validators';

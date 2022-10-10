@@ -23,6 +23,7 @@
   "keywords": [],
   "dependencies": {
     "@types/lodash": "^4.14.186",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "lor-deckcodes-ts": "^1.1.0"
   }
 }
