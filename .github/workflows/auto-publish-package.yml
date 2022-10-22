@@ -49,11 +49,14 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
 
-      - name: Install dependencies and build package
+      - name: Install dependencies
         working-directory: ./
         run: |
           echo "*** Iniciando NPM Install ***"
           npm install
+
+      - name: Build package
+        run: |
           echo "*** Iniciando NPM RUN BUILD ***"
           npm run build
 
