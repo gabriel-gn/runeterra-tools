@@ -1,0 +1,96 @@
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person Who Triggered'
+        required: true
+        default: 'gabriel-gn'
+
+jobs:
+  check-version:
+    name: Check package version
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+      version: ${{ steps.check.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Check version changes
+        uses: gabriel-gn/hello-world-github-action@v1.0.1
+        with:
+          packageName: '@gabrielgn-test/runeterra-tools'
+          filepath: './package.json'
+        id: check # Usa o output checked a partir desse id
+      - name: Version checked
+        run: 'echo "Version -> ${{ steps.check.outputs.changed }}"'
+      - name: Version update detected
+        if: |
+          steps.check.outputs.changed == 'true'
+        run: 'echo "Versão alterada, será criada uma nova release no npm!"'
+      - name: Version update not detected
+        if: |
+          steps.check.outputs.changed == 'false'
+        run: 'echo "Versão de pacote não alterada, não será publicado no npm!"'
+
+  publish-npm:
+    name: publish NPM
+    needs: check-version
+    runs-on: ubuntu-latest
+    if: |
+      needs.check-version.outputs.changed == 'true'
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies and build package
+        working-directory: ./
+        run: |
+          echo "*** Iniciando NPM Install ***"
+          npm install
+          echo "*** Iniciando NPM RUN BUILD ***"
+          npm run build
+
+      - name: Publish package to NPM
+        working-directory: ./
+        run: |
+          npm run deploy-npm
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+  tag-version:
+    name: Tag Version
+    needs: [check-version, publish-npm]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Klemensas/action-autotag@stable
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          package_root: "/"
+          tag_prefix: "v"
+
+  create-release:
+    name: Create Release
+    needs: [check-version, publish-npm, tag-version]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ needs.check-version.outputs.version }}
+          release_name: Release v${{ needs.check-version.outputs.version }}
+          body: "-"
+          draft: false
+          prerelease: false

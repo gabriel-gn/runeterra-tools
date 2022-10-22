@@ -1,6 +1,6 @@
 {
   "name": "@gabrielgn-test/runeterra-tools",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Legends of runeterra utilities for personal usage",
   "author": "Gabriel Nogueira",
   "license": "MIT",
@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc",
+    "deploy-npm": "npm publish --access=public"
   },
   "devDependencies": {
     "@types/expect": "^24.3.0",
@@ -23,6 +24,7 @@
   "keywords": [],
   "dependencies": {
     "@types/lodash": "^4.14.186",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "lor-deckcodes-ts": "^1.1.0"
   }
 }
