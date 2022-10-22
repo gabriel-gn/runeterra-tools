@@ -35,6 +35,6 @@ describe("test card-utils validators", () => {
                 60
             )
         )
-        .toBe(false);
+        .toBe(true);
     });
 });

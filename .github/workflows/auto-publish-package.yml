@@ -57,6 +57,9 @@ jobs:
           echo "*** Iniciando NPM RUN BUILD ***"
           npm run build
 
+      - name: Run the tests
+        run: npm test -- --coverage
+
       - name: Publish package to NPM
         working-directory: ./
         run: |
