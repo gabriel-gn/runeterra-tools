@@ -1,3 +1,4 @@
+export * from './card-utils/models';
 export * from './card-utils/utils';
 export * from './card-utils/validators';
 

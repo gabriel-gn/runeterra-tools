@@ -1,6 +1,7 @@
 import {CardRegionAbbreviation, isRiotLoRCard, RegionAbbreviation, RiotLoRCard} from "../riot-assets/models-cards";
 import {RiotLoRRegionRef} from "../riot-assets/models-globals";
 import {get, intersection} from "lodash";
+import {CardType} from "./models";
 
 /**
  * get "NX" from a card with cardCode "01NX005"
@@ -41,7 +42,9 @@ export function regionRefToRegionAbbreviation(regionRef: string): CardRegionAbbr
         const newRegionAbbr: any = {} // "RegionAbbreviation" with all property names as uppercase
         Object.keys(RegionAbbreviation)
             .forEach(
-                (k: string) => { newRegionAbbr[`${k.toUpperCase()}`] = RegionAbbreviation[k as keyof typeof RegionAbbreviation] }
+                (k: string) => {
+                    newRegionAbbr[`${k.toUpperCase()}`] = RegionAbbreviation[k as keyof typeof RegionAbbreviation]
+                }
             );
         response = newRegionAbbr[regionRef as keyof typeof RegionAbbreviation] as CardRegionAbbreviation;
     }
@@ -75,4 +78,30 @@ export function getCardMainRegion(card: RiotLoRCard, regionRefs: RiotLoRRegionRe
         result = regionRefsForCard[0] || getCardRegionRef(card);
     }
     return regionRefToRegionAbbreviation(result);
+}
+
+/**
+ * get cardType from input to categorize it.
+ * @param card
+ */
+export function getCardType(card: RiotLoRCard): CardType {
+    if (!!card.spellSpeedRef) {
+        return 'Spell';
+    } else if (
+        card.keywordRefs &&
+        card.keywordRefs.length > 0 &&
+        card.keywordRefs.includes('LandmarkVisualOnly')
+    ) {
+        return 'Landmark';
+    } else if (
+        card.keywordRefs &&
+        card.keywordRefs.length > 0 &&
+        card.keywordRefs.includes('Equipment')
+    ) {
+        return 'Equipment';
+    } else if (card.rarityRef === 'Champion') {
+        return 'Champion';
+    } else {
+        return 'Follower';
+    }
 }

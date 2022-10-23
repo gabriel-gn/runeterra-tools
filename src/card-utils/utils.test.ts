@@ -1,5 +1,18 @@
-import {getCardMainRegion, getCardRegionAbbreviation, getCardRegionRef, regionRefToRegionAbbreviation} from "./utils";
-import {ionianHookmaster, twinDisciplines} from "../mocks/card-reference.mock";
+import {
+    getCardMainRegion,
+    getCardRegionAbbreviation,
+    getCardRegionRef,
+    getCardType,
+    regionRefToRegionAbbreviation
+} from "./utils";
+import {
+    bladesEdgeMock,
+    demacianSteelMock,
+    emperorsDaisMock,
+    ionianHookmasterMock,
+    teemoMock,
+    twinDisciplinesMock
+} from "../mocks/card-reference.mock";
 
 describe("test card-utils utils.ts", () => {
     it("should getCardRegionAbbreviation from CardCode", () => {
@@ -7,7 +20,7 @@ describe("test card-utils utils.ts", () => {
     });
 
     it("should getCardRegionAbbreviation from RiotLoRCard", () => {
-        expect(getCardRegionAbbreviation(twinDisciplines)).toBe('IO');
+        expect(getCardRegionAbbreviation(twinDisciplinesMock)).toBe('IO');
     });
 
     it("should getCardRegionRef from CardCode", () => {
@@ -15,7 +28,7 @@ describe("test card-utils utils.ts", () => {
     });
 
     it("should getCardRegionRef from RiotLoRCard", () => {
-        expect(getCardRegionRef(twinDisciplines)).toBe('Ionia');
+        expect(getCardRegionRef(twinDisciplinesMock)).toBe('Ionia');
     });
 
     it("should convert valid regionRef", () => {
@@ -27,10 +40,31 @@ describe("test card-utils utils.ts", () => {
     });
 
     it("should getCardMainRegion", () => {
-        expect(getCardMainRegion(ionianHookmaster)).toBe('NX');
+        expect(getCardMainRegion(ionianHookmasterMock)).toBe('NX');
     });
 
     it("should getCardMainRegion from a list of region refs", () => {
-        expect(getCardMainRegion(ionianHookmaster, ["Demacia", "Ionia"])).toBe('IO');
+        expect(getCardMainRegion(ionianHookmasterMock, ["Demacia", "Ionia"])).toBe('IO');
+    });
+
+    //'Champion' | 'Follower' | 'Spell' | 'Landmark' | 'Equipment'
+    it("should getCardType - 'Champion'", () => {
+        expect(getCardType(teemoMock)).toBe('Champion');
+    });
+
+    it("should getCardType - 'Follower'", () => {
+        expect(getCardType(ionianHookmasterMock)).toBe('Follower');
+    });
+
+    it("should getCardType - 'Spell'", () => {
+        expect(getCardType(bladesEdgeMock)).toBe('Spell');
+    });
+
+    it("should getCardType - 'Landmark'", () => {
+        expect(getCardType(emperorsDaisMock)).toBe('Landmark');
+    });
+
+    it("should getCardType - 'Equipment'", () => {
+        expect(getCardType(demacianSteelMock)).toBe('Equipment');
     });
 });
