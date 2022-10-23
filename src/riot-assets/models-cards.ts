@@ -39,6 +39,36 @@ export interface RiotLoRCard {
     set: RiotLorSet; // eg: 'Set1'
 }
 
+export function isRiotLoRCard(object: any) {
+    return object.hasOwnProperty('associatedCards')
+        && object.hasOwnProperty('associatedCardRefs')
+        && object.hasOwnProperty('assets')
+        && object.hasOwnProperty('regions')
+        && object.hasOwnProperty('regionRefs')
+        && object.hasOwnProperty('attack')
+        && object.hasOwnProperty('cost')
+        && object.hasOwnProperty('health')
+        && object.hasOwnProperty('description')
+        && object.hasOwnProperty('descriptionRaw')
+        && object.hasOwnProperty('levelupDescription')
+        && object.hasOwnProperty('levelupDescriptionRaw')
+        && object.hasOwnProperty('flavorText')
+        && object.hasOwnProperty('artistName')
+        && object.hasOwnProperty('name')
+        && object.hasOwnProperty('cardCode')
+        && object.hasOwnProperty('keywords')
+        && object.hasOwnProperty('keywordRefs')
+        && object.hasOwnProperty('spellSpeed')
+        && object.hasOwnProperty('spellSpeedRef')
+        && object.hasOwnProperty('rarity')
+        && object.hasOwnProperty('rarityRef')
+        && object.hasOwnProperty('subtypes')
+        && object.hasOwnProperty('supertype')
+        && object.hasOwnProperty('type')
+        && object.hasOwnProperty('collectible')
+        && object.hasOwnProperty('set')
+}
+
 export type CardRegionAbbreviation =
     'DE'
     | 'FR'
