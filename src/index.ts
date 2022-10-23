@@ -1,5 +1,8 @@
+export * from './card-utils/utils';
 export * from './card-utils/validators';
 
+export * from './deck-utils/models';
+export * from './deck-utils/utils';
 export * from './deck-utils/validators';
 
 export * from './riot-assets/models-globals';

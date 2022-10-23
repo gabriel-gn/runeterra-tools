@@ -10,7 +10,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "build": "rm -rf dist && tsc",
     "deploy-npm": "npm publish --access=public"
   },

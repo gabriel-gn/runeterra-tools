@@ -1,8 +1,9 @@
 import {CardRegionAbbreviation, RegionAbbreviation, RiotLoRCard} from "../riot-assets/models-cards";
 import {DeckCard, LoRDeck} from "./models";
-import {get, intersection} from "lodash";
-import {getCardRegionAbbreviation, getCardRegionRef} from "../card-utils/utils";
-import {RiotLoRRegionRef} from "../riot-assets/models-globals";
+import {
+    getCardMainRegion,
+    regionAbbreviationToRegionRef
+} from "../card-utils/utils";
 
 export const originRules: {
     name: string,
@@ -86,56 +87,12 @@ export const originRules: {
     },
 ];
 
-/**
- * try to transform "PiltoverZaun" into "PZ"
- * If not correctly cased, try to uppercase the enum properties to find
- * @param regionRef eg: 'PiltoverZaun' | 'Noxus' | 'Ionia' etc...
- */
-export function regionRefToRegionAbbreviation(regionRef: string): CardRegionAbbreviation {
-    let response = get(RegionAbbreviation, regionRef);
-    if (!response) {
-        // caso dê errado, converte tudo em uppercase e tenta achar a região
-        regionRef = `${regionRef}`.toUpperCase();
-        const newRegionAbbr: any = {} // "RegionAbbreviation" with all property names as uppercase
-        Object.keys(RegionAbbreviation)
-            .forEach(
-                (k: string) => { newRegionAbbr[`${k.toUpperCase()}`] = RegionAbbreviation[k as keyof typeof RegionAbbreviation] }
-            );
-        response = newRegionAbbr[regionRef as keyof typeof RegionAbbreviation] as CardRegionAbbreviation;
-    }
-    return response
-}
-
-/**
- * try to transform "PZ" into "PiltoverZaun"
- * If not correctly cased, try to uppercase
- * @param regionAbbreviation eg: 'PZ' | 'NX' | 'IO' etc...
- */
-export function regionAbbreviationToRegionRef(regionAbbreviation: CardRegionAbbreviation): RiotLoRRegionRef {
-    // @ts-ignore
-    return Object.entries(RegionAbbreviation).find(e => e[1] === regionAbbreviation)[0] as RiotLoRRegionRef;
-}
-
-export function getCardMainRegion(card: RiotLoRCard, regionRefs: RiotLoRRegionRef[] = []): CardRegionAbbreviation {
-    let result;
-    if (regionRefs.length === 0) {
-        result = getCardRegionRef(card)
-    } else {
-        const regionRefsForCard = intersection(
-            regionRefs,
-            card.regionRefs
-        ) as RiotLoRRegionRef[];
-        result = regionRefsForCard[0] || getCardRegionRef(card);
-    }
-    return regionRefToRegionAbbreviation(result);
-}
-
 export function getCardMainRegionFromDeck(card: RiotLoRCard, lorDeck: LoRDeck): CardRegionAbbreviation {
     const altRules = originRules.filter(r => r.condition(lorDeck)); // pode se encaixar em multiplas regras de origin
 
     if (altRules.length > 0 && altRules.some(r => r.rule(card))) {
         return RegionAbbreviation.Runeterra;
     } else {
-        return getCardMainRegion(card, lorDeck.factions.map(f => regionAbbreviationToRegionRef(f)));
+        return getCardMainRegion(card, lorDeck.mainFactions.map(f => regionAbbreviationToRegionRef(f)));
     }
 }
