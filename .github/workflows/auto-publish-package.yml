@@ -55,21 +55,16 @@ jobs:
           echo "*** Iniciando NPM Install ***"
           npm install
 
-      - name: Build package
-        run: |
-          echo "*** Iniciando NPM RUN BUILD ***"
-          npm run build
-
       - name: Run the tests
         run: npm test -- --coverage
 
       - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+
+      - name: Build package
         run: |
-          # Replace `linux` below with the appropriate OS
-          # Options are `alpine`, `linux`, `macos`, `windows`
-          curl -Os https://uploader.codecov.io/latest/linux/codecov
-          chmod +x codecov
-          ./codecov -t ${CODECOV_TOKEN}
+          echo "*** Iniciando NPM RUN BUILD ***"
+          npm run build
 
       - name: Publish package to NPM
         working-directory: ./
