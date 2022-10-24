@@ -39,6 +39,7 @@ jobs:
       - name: Generate docs
         run: |
           echo "*** Generating Docs! ***"
+          npm install
           npm run docs
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
