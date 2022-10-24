@@ -70,7 +70,7 @@ jobs:
       - name: Generate docs
         run: |
           echo "*** Generating Docs! ***"
-          sudo apt-get install --reinstall xdg-utils
+          sudo apt-get install --reinstall xdg-utils links2 elinks links lynx w3m
           npm docs
 
       - name: Deploy Docs
