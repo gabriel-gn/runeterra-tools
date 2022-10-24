@@ -70,6 +70,7 @@ jobs:
       - name: Generate docs
         run: |
           echo "*** Generating Docs! ***"
+          sudo apt-get install --reinstall xdg-utils
           npm docs
 
       - name: Deploy Docs
