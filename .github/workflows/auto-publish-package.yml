@@ -70,8 +70,7 @@ jobs:
       - name: Generate docs
         run: |
           echo "*** Generating Docs! ***"
-          sudo apt-get install -y --reinstall xdg-utils links2 elinks links lynx w3m
-          npm docs
+          npm run docs
 
       - name: Deploy Docs
         uses: JamesIves/github-pages-deploy-action@v4
