@@ -36,74 +36,83 @@ jobs:
           steps.check.outputs.changed == 'false'
         run: 'echo "Versão de pacote não alterada, não será publicado no npm!"'
 
-  publish-npm:
-    name: publish NPM
-    needs: check-version
-    runs-on: ubuntu-latest
-    if: |
-      needs.check-version.outputs.changed == 'true'
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-
-      - name: Install dependencies
-        working-directory: ./
+      - name: Generate docs
         run: |
-          echo "*** Iniciando NPM Install ***"
-          npm install
+          echo "*** Generating Docs! ***"
+          npm run docs
+      - name: Deploy 🚀
+          uses: JamesIves/github-pages-deploy-action@v4
+          with:
+            folder: docs # The folder the action should deploy.
 
-      - name: Run the tests
-        run: npm test -- --coverage
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          fail_ci_if_error: true # optional (default = false)
-          verbose: true # optional (default = false)
-
-      - name: Build package
-        run: |
-          echo "*** Iniciando NPM RUN BUILD ***"
-          npm run build
-
-      - name: Publish package to NPM
-        working-directory: ./
-        run: |
-          npm run deploy-npm
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-  tag-version:
-    name: Tag Version
-    needs: [check-version, publish-npm]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: Klemensas/action-autotag@stable
-        with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          package_root: "/"
-          tag_prefix: "v"
-
-  create-release:
-    name: Create Release
-    needs: [check-version, publish-npm, tag-version]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@master
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ needs.check-version.outputs.version }}
-          release_name: Release v${{ needs.check-version.outputs.version }}
-          body: "-"
-          draft: false
-          prerelease: false
+  # publish-npm:
+  #   name: publish NPM
+  #   needs: check-version
+  #   runs-on: ubuntu-latest
+  #   if: |
+  #     needs.check-version.outputs.changed == 'true'
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 12
+  #         registry-url: https://registry.npmjs.org/
+#
+  #     - name: Install dependencies
+  #       working-directory: ./
+  #       run: |
+  #         echo "*** Iniciando NPM Install ***"
+  #         npm install
+#
+  #     - name: Run the tests
+  #       run: npm test -- --coverage
+#
+  #     - name: Upload coverage reports to Codecov
+  #       uses: codecov/codecov-action@v3
+  #       with:
+  #         token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+  #         fail_ci_if_error: true # optional (default = false)
+  #         verbose: true # optional (default = false)
+#
+  #     - name: Build package
+  #       run: |
+  #         echo "*** Iniciando NPM RUN BUILD ***"
+  #         npm run build
+#
+  #     - name: Publish package to NPM
+  #       working-directory: ./
+  #       run: |
+  #         npm run deploy-npm
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+#
+  # tag-version:
+  #   name: Tag Version
+  #   needs: [check-version, publish-npm]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: Klemensas/action-autotag@stable
+  #       with:
+  #         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+  #         package_root: "/"
+  #         tag_prefix: "v"
+#
+  # create-release:
+  #   name: Create Release
+  #   needs: [check-version, publish-npm, tag-version]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@master
+  #     - name: Create Release
+  #       id: create_release
+  #       uses: actions/create-release@latest
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         tag_name: v${{ needs.check-version.outputs.version }}
+  #         release_name: Release v${{ needs.check-version.outputs.version }}
+  #         body: "-"
+  #         draft: false
+  #         prerelease: false
