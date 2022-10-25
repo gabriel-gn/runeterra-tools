@@ -67,15 +67,14 @@ jobs:
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
 
-#      - name: Generate docs
-#        run: |
-#          echo "*** Generating Docs! ***"
-#          npm run docs
-#
-#      - name: Deploy Docs
-#        uses: JamesIves/github-pages-deploy-action@v4
-#        with:
-#          folder: docs # The folder the action should deploy.
+      - name: Create the docs directory locally in CI
+        run: npx typedoc src/index.ts
+
+      - name: Deploy Docs to Github Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: docs
 
       - name: Build package
         run: |

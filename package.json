@@ -1,6 +1,6 @@
 {
   "name": "@gabrielgn-test/runeterra-tools",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Legends of runeterra utilities for personal usage",
   "author": "Gabriel Nogueira",
   "license": "MIT",
@@ -12,7 +12,7 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "rm -rf dist && tsc",
-    "docs": "typedoc src/index.ts",
+    "docs": "npx typedoc src/index.ts",
     "deploy-npm": "npm publish --access=public"
   },
   "devDependencies": {
