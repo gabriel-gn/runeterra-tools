@@ -12,7 +12,7 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "rm -rf dist && tsc",
-    "docs": "npx typedoc src/index.ts",
+    "docs": "typedoc --options ./typedoc.json --tsconfig ./tsconfig.json",
     "deploy-npm": "npm publish --access=public"
   },
   "devDependencies": {

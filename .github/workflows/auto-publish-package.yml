@@ -46,9 +46,9 @@ jobs:
       needs.check-version.outputs.changed == 'true'
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 14
           registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
