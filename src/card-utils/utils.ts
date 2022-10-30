@@ -1,5 +1,5 @@
 import {CardRegionAbbreviation, isRiotLoRCard, RegionAbbreviation, RiotLoRCard} from "../riot-assets/models-cards";
-import {RiotLoRRegionRef} from "../riot-assets/models-globals";
+import {RiotLorRarityRef, RiotLoRRegionRef} from "../riot-assets/models-globals";
 import {get, intersection} from "lodash";
 import {CardType} from "./models";
 
@@ -103,5 +103,29 @@ export function getCardType(card: RiotLoRCard): CardType {
         return 'Champion';
     } else {
         return 'Follower';
+    }
+}
+
+/**
+ * get rarityRef input and return the card cost in green essences
+ * @param rarityRef
+ */
+export function rarityRefToCardCost(rarityRef: RiotLorRarityRef | string): number {
+    switch (rarityRef.toUpperCase()) {
+        case 'CHAMPION':
+            return 3000;
+            break;
+        case 'EPIC':
+            return 1200;
+            break;
+        case 'RARE':
+            return 300;
+            break;
+        case 'COMMON':
+            return 100;
+            break;
+        default:
+            return 0;
+            break;
     }
 }
