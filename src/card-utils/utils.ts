@@ -1,4 +1,4 @@
-import {CardRegionAbbreviation, isRiotLoRCard, RegionAbbreviation, RiotLoRCard} from "../riot-assets/models-cards";
+import {CardRegionAbbreviation, isRiotLoRCard, CARD_REGION_ABBREVIATION, RiotLoRCard} from "../riot-assets/models-cards";
 import {RiotLorRarityRef, RiotLoRRegionRef} from "../riot-assets/models-globals";
 import {get, intersection} from "lodash";
 import {CardType} from "./models";
@@ -24,7 +24,7 @@ export function getCardRegionRef(card: RiotLoRCard | string): RiotLoRRegionRef {
     if (isRiotLoRCard(card)) {
         code = (card as RiotLoRCard).cardCode;
     }
-    const entry = Object.entries(RegionAbbreviation).find(e => e[1] === getCardRegionAbbreviation(code));
+    const entry = Object.entries(CARD_REGION_ABBREVIATION).find(e => e[1] === getCardRegionAbbreviation(code));
     // @ts-ignore
     return entry[0];
 }
@@ -35,18 +35,18 @@ export function getCardRegionRef(card: RiotLoRCard | string): RiotLoRRegionRef {
  * @param regionRef eg: 'PiltoverZaun' | 'Noxus' | 'Ionia' etc...
  */
 export function regionRefToRegionAbbreviation(regionRef: string): CardRegionAbbreviation {
-    let response = get(RegionAbbreviation, regionRef);
+    let response = get(CARD_REGION_ABBREVIATION, regionRef);
     if (!response) {
         // caso dê errado, converte tudo em uppercase e tenta achar a região
         regionRef = `${regionRef}`.toUpperCase();
-        const newRegionAbbr: any = {} // "RegionAbbreviation" with all property names as uppercase
-        Object.keys(RegionAbbreviation)
+        const newRegionAbbr: any = {} // "CARD_REGION_ABBREVIATION" with all property names as uppercase
+        Object.keys(CARD_REGION_ABBREVIATION)
             .forEach(
                 (k: string) => {
-                    newRegionAbbr[`${k.toUpperCase()}`] = RegionAbbreviation[k as keyof typeof RegionAbbreviation]
+                    newRegionAbbr[`${k.toUpperCase()}`] = CARD_REGION_ABBREVIATION[k as keyof typeof CARD_REGION_ABBREVIATION]
                 }
             );
-        response = newRegionAbbr[regionRef as keyof typeof RegionAbbreviation] as CardRegionAbbreviation;
+        response = newRegionAbbr[regionRef as keyof typeof CARD_REGION_ABBREVIATION] as CardRegionAbbreviation;
     }
     return response
 }
@@ -58,7 +58,7 @@ export function regionRefToRegionAbbreviation(regionRef: string): CardRegionAbbr
  */
 export function regionAbbreviationToRegionRef(regionAbbreviation: CardRegionAbbreviation): RiotLoRRegionRef {
     // @ts-ignore
-    return Object.entries(RegionAbbreviation).find(e => e[1] === regionAbbreviation)[0] as RiotLoRRegionRef;
+    return Object.entries(CARD_REGION_ABBREVIATION).find(e => e[1] === regionAbbreviation)[0] as RiotLoRRegionRef;
 }
 
 /**
