@@ -1,4 +1,4 @@
-import {CardRegionAbbreviation, RegionAbbreviation, RiotLoRCard} from "../riot-assets/models-cards";
+import {CardRegionAbbreviation, CARD_REGION_ABBREVIATION, RiotLoRCard} from "../riot-assets/models-cards";
 import {DeckCard, LoRDeck} from "./models";
 import {
     getCardMainRegion, getCardType,
@@ -249,7 +249,7 @@ export function getCardMainRegionFromDeck(card: RiotLoRCard, lorDeck: LoRDeck): 
     const originRules = championOriginRules.filter(r => r.doesDeckMeetCondition(lorDeck)); // pode se encaixar em multiplas regras de origin
 
     if (originRules.length > 0 && originRules.some(r => r.doesCardMeetCondition(card))) {
-        return RegionAbbreviation.Runeterra;
+        return CARD_REGION_ABBREVIATION.RUNETERRA;
     } else {
         return getCardMainRegion(card, lorDeck.mainFactions.map(f => regionAbbreviationToRegionRef(f)));
     }

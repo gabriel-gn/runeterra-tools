@@ -1,4 +1,5 @@
 import {
+    RIOT_LOR_REGION_REF,
     RIOT_LOR_SPELL_SPEED_REF,
     RiotLoRKeywordRef,
     RiotLorRarityRef,
@@ -15,7 +16,7 @@ export interface RiotLoRCard {
         fullAbsolutePath: string;
     }[];
     regions: string[]; // eg: ['Ionia', 'Ilhas das Sombras']
-    regionRefs: RiotLoRRegionRef[]; // eg: ['BandleCity', 'ShadowIsles']
+    regionRefs: RiotLoRRegionRef[] | RIOT_LOR_REGION_REF[]; // eg: ['BandleCity', 'ShadowIsles']
     attack: number; // eg: 3
     cost: number; // eg: 2
     health: number; // eg: 1
@@ -70,45 +71,33 @@ export function isRiotLoRCard(object: any) {
         && object.hasOwnProperty('set')
 }
 
-export type CardRegionAbbreviation =
-    'DE'
-    | 'FR'
-    | 'IO'
-    | 'NX'
-    | 'PZ'
-    | 'SI'
-    | 'BW'
-    | 'MT'
-    | 'SH'
-    | 'BC'
-    | 'RU'
-
-export enum RegionAbbreviation {
-    Demacia = 'DE',
-    Freljord = 'FR',
-    Ionia = 'IO',
-    Noxus = 'NX',
-    PiltoverZaun = 'PZ',
-    ShadowIsles = 'SI',
-    Bilgewater = 'BW',
-    Targon = 'MT',
-    Shurima = 'SH',
-    BandleCity = 'BC',
-    Runeterra = 'RU',
+export enum CARD_REGION_ABBREVIATION {
+    DEMACIA = 'DE',
+    FRELJORD = 'FR',
+    IONIA = 'IO',
+    NOXUS = 'NX',
+    PILTOVER_ZAUN = 'PZ',
+    SHADOW_ISLES = 'SI',
+    BILGEWATER = 'BW',
+    TARGON = 'MT',
+    SHURIMA = 'SH',
+    BANDLE_CITY = 'BC',
+    RUNETERRA = 'RU',
 }
 
+export type CardRegionAbbreviation =
+    `${CARD_REGION_ABBREVIATION.DEMACIA}`
+    | `${CARD_REGION_ABBREVIATION.FRELJORD}`
+    | `${CARD_REGION_ABBREVIATION.IONIA}`
+    | `${CARD_REGION_ABBREVIATION.NOXUS}`
+    | `${CARD_REGION_ABBREVIATION.PILTOVER_ZAUN}`
+    | `${CARD_REGION_ABBREVIATION.SHADOW_ISLES}`
+    | `${CARD_REGION_ABBREVIATION.BILGEWATER}`
+    | `${CARD_REGION_ABBREVIATION.TARGON}`
+    | `${CARD_REGION_ABBREVIATION.SHURIMA}`
+    | `${CARD_REGION_ABBREVIATION.BANDLE_CITY}`
+    | `${CARD_REGION_ABBREVIATION.RUNETERRA}`
+
 export function isCardRegionAbbreviation(variable: any): boolean {
-    return [
-        'DE',
-        'FR',
-        'IO',
-        'NX',
-        'PZ',
-        'SI',
-        'BW',
-        'MT',
-        'SH',
-        'BC',
-        'RU',
-    ].includes(`${variable}`);
+    return Object.values(CARD_REGION_ABBREVIATION).map(i => `${i}`).includes(`${variable}`);
 }
