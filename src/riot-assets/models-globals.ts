@@ -125,16 +125,22 @@ export function isRiotLoRRegionRef(variable: any): boolean {
 }
 
 // [...new Set(temp1.map(c => c.spellSpeedRef).flat(1))]
+export enum RIOT_LOR_SPELL_SPEED_REF {
+    BURST = 'Burst',
+    FAST = 'Fast',
+    SLOW = 'Slow',
+}
+
 export type RiotLorSpellSpeedRef =
-    'Burst'
-    | 'Fast'
-    | 'Slow'
+    `${RIOT_LOR_SPELL_SPEED_REF.BURST}`
+    | `${RIOT_LOR_SPELL_SPEED_REF.FAST}`
+    | `${RIOT_LOR_SPELL_SPEED_REF.SLOW}`
 
 export function isRiotLorSpellSpeedRef(variable: any): boolean {
     return [
-        'Burst',
-        'Fast',
-        'Slow',
+        `${RIOT_LOR_SPELL_SPEED_REF.BURST}`,
+        `${RIOT_LOR_SPELL_SPEED_REF.FAST}`,
+        `${RIOT_LOR_SPELL_SPEED_REF.SLOW}`,
     ].includes(`${variable}`);
 }
 

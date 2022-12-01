@@ -10,6 +10,8 @@
     "dist/**/*"
   ],
   "scripts": {
+    "prepare-environment": "npm install && npm install -g ts-node typescript '@types/node'",
+    "execute": "ts-node src/execute.ts",
     "test": "jest --coverage",
     "build": "rm -rf dist && tsc",
     "docs": "typedoc --options ./typedoc.json --tsconfig ./tsconfig.json",

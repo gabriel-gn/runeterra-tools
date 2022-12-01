@@ -1,4 +1,5 @@
 import {
+    RIOT_LOR_SPELL_SPEED_REF,
     RiotLoRKeywordRef,
     RiotLorRarityRef,
     RiotLoRRegionRef,
@@ -13,7 +14,7 @@ export interface RiotLoRCard {
         gameAbsolutePath: string;
         fullAbsolutePath: string;
     }[];
-    regions: string[]; // eg: ['Ionia', 'Noxus']
+    regions: string[]; // eg: ['Ionia', 'Ilhas das Sombras']
     regionRefs: RiotLoRRegionRef[]; // eg: ['BandleCity', 'ShadowIsles']
     attack: number; // eg: 3
     cost: number; // eg: 2
@@ -28,8 +29,8 @@ export interface RiotLoRCard {
     cardCode: string; // eg: '01IO015'
     keywords: string[]; // eg: ['Quick Attack', 'Formidable']
     keywordRefs: RiotLoRKeywordRef[]; // eg: ['CantBlock', 'LastBreath']
-    spellSpeed: string; // eg: "Fast"
-    spellSpeedRef: '' | RiotLorSpellSpeedRef; // eg: "Burst"
+    spellSpeed: string; // eg: "Rápida"
+    spellSpeedRef: '' | RiotLorSpellSpeedRef | RIOT_LOR_SPELL_SPEED_REF; // eg: "Burst"
     rarity: string; // eg: 'COMUM'
     rarityRef: RiotLorRarityRef; // eg: 'Common'
     subtypes: string[]; // eg: ['CELESTIAL', 'DRAGON']. In the card game it only shows in the card the first one (this one is for the Great Beyond)
