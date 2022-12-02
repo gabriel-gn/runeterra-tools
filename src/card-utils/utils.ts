@@ -21,7 +21,7 @@ export function getCardRegionAbbreviation(card: RiotLoRCard | string): CardRegio
  */
 export function getCardRegionRef(card: RiotLoRCard | string): RiotLoRRegionRef {
     let code = `${card}`;
-    if (isRiotLoRCard(card)) {
+    if (card.hasOwnProperty('cardCode')) {
         code = (card as RiotLoRCard).cardCode;
     }
     const entry = Object.entries(CARD_REGION_ABBREVIATION).find(e => e[1] === getCardRegionAbbreviation(code));
