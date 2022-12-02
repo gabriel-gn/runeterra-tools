@@ -5,7 +5,7 @@ import {
     regionAbbreviationToRegionRef
 } from "../card-utils/utils";
 import _ from "lodash";
-import {RIOT_LOR_SPELL_SPEED_REF} from "../riot-assets/models-globals";
+import {RIOT_LOR_REGION_REF, RIOT_LOR_SPELL_SPEED_REF} from "../riot-assets/models-globals";
 import {CARD_TYPE} from "../card-utils/models";
 
 export const regionRules: {
@@ -16,91 +16,91 @@ export const regionRules: {
     {
         name: 'BandleCity',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('BandleCity'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.BANDLE_CITY));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('BandleCity');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.BANDLE_CITY);
         },
     },
     {
         name: 'Bilgewater',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('Bilgewater'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.BILGEWATER));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('Bilgewater');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.BILGEWATER);
         },
     },
     {
         name: 'Demacia',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('Demacia'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.DEMACIA));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('Demacia');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.DEMACIA);
         },
     },
     {
         name: 'Freljord',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('Freljord'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.FRELJORD));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('Freljord');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.FRELJORD);
         },
     },
     {
         name: 'Ionia',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('Ionia'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.IONIA));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('Ionia');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.IONIA);
         },
     },
     {
         name: 'Noxus',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('Noxus'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.NOXUS));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('Noxus');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.NOXUS);
         },
     },
     {
         name: 'PiltoverZaun',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('PiltoverZaun'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.PILTOVER_ZAUN));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('PiltoverZaun');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.PILTOVER_ZAUN);
         },
     },
     {
         name: 'ShadowIsles',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('ShadowIsles'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.SHADOW_ISLES));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('ShadowIsles');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.SHADOW_ISLES);
         },
     },
     {
         name: 'Shurima',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('Shurima'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.SHURIMA));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('Shurima');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.SHURIMA);
         },
     },
     {
         name: 'Targon',
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
-            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes('Targon'));
+            return lorDeck.cards.champions.concat(lorDeck.cards.followers).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.TARGON));
         },
         doesCardMeetCondition: (card: RiotLoRCard) => {
-            return card.regionRefs.includes('Targon');
+            return card.regionRefs.includes(RIOT_LOR_REGION_REF.TARGON);
         },
     }
 ]
