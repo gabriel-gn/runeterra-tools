@@ -1,4 +1,10 @@
-import {CardRegionAbbreviation, isRiotLoRCard, CARD_REGION_ABBREVIATION, RiotLoRCard} from "../riot-assets/models-cards";
+import {
+    CardRegionAbbreviation,
+    isRiotLoRCard,
+    CARD_REGION_ABBREVIATION,
+    RiotLoRCard,
+    isOriginRegionAbbreviation
+} from "../riot-assets/models-cards";
 import {RIOT_LOR_REGION_REF, RiotLorRarityRef, RiotLoRRegionRef} from "../riot-assets/models-globals";
 import {get, intersection} from "lodash";
 import {CardType} from "./models";
@@ -54,8 +60,16 @@ export function regionRefToRegionAbbreviation(regionRef: string): CardRegionAbbr
  * @param regionAbbreviation eg: 'PZ' | 'NX' | 'IO' etc...
  */
 export function regionAbbreviationToRegionRef(regionAbbreviation: CardRegionAbbreviation): RiotLoRRegionRef {
-    // @ts-ignore
-    return RIOT_LOR_REGION_REF[Object.entries(CARD_REGION_ABBREVIATION).find(e => e[1] === regionAbbreviation)[0]] as RiotLoRRegionRef;
+    try {
+        // @ts-ignore
+        return RIOT_LOR_REGION_REF[Object.entries(CARD_REGION_ABBREVIATION).find(e => e[1] === regionAbbreviation)[0]] as RiotLoRRegionRef;
+    } catch (e) {
+        if (isOriginRegionAbbreviation(regionAbbreviation)) {
+            return RIOT_LOR_REGION_REF.RUNETERRA;
+        } else {
+            throw "could not get region abbreviation"
+        }
+    }
 }
 
 /**
