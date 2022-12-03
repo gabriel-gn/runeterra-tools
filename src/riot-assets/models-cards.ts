@@ -71,6 +71,33 @@ export function isRiotLoRCard(object: any) {
         && object.hasOwnProperty('set')
 }
 
+// riot globals.regions
+export enum ORIGIN_REGION_ABBREVIATION {
+    JHIN = "Jhin",
+    BARD = "Bard",
+    EVELYNN = "Evelynn",
+    KAYN = "Kayn",
+    JAX = "Jax",
+    VARUS = "Varus",
+    AATROX = "Aatrox",
+    RYZE = "RYZE",
+}
+
+export type OriginRegionAbbreviation =
+    `${ORIGIN_REGION_ABBREVIATION.JHIN}`
+    | `${ORIGIN_REGION_ABBREVIATION.BARD}`
+    | `${ORIGIN_REGION_ABBREVIATION.EVELYNN}`
+    | `${ORIGIN_REGION_ABBREVIATION.KAYN}`
+    | `${ORIGIN_REGION_ABBREVIATION.JAX}`
+    | `${ORIGIN_REGION_ABBREVIATION.VARUS}`
+    | `${ORIGIN_REGION_ABBREVIATION.AATROX}`
+    | `${ORIGIN_REGION_ABBREVIATION.RYZE}`
+
+export function isOriginRegionAbbreviation(variable: any): boolean {
+    return Object.values(ORIGIN_REGION_ABBREVIATION).map(i => `${i}`).includes(`${variable}`);
+}
+
+// riot globals.regions
 export enum CARD_REGION_ABBREVIATION {
     DEMACIA = 'DE',
     FRELJORD = 'FR',

@@ -1,4 +1,16 @@
-import {CARD_REGION_ABBREVIATION, CardRegionAbbreviation, RiotLoRCard} from "../riot-assets/models-cards";
+import {
+    CARD_REGION_ABBREVIATION,
+    CardRegionAbbreviation,
+    OriginRegionAbbreviation,
+    RiotLoRCard
+} from "../riot-assets/models-cards";
+
+export interface DeckbuildingRules {
+    name: string,
+    abbreviation: CardRegionAbbreviation | OriginRegionAbbreviation // as described in riot globals.regions
+    doesDeckMeetCondition: (lorDeck: LoRDeck) => boolean;
+    doesCardMeetCondition: (card: RiotLoRCard) => boolean;
+}
 
 export interface DeckCard {
     card: RiotLoRCard;
