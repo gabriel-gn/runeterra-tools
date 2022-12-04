@@ -2,7 +2,7 @@ import {
     CardRegionAbbreviation,
     CARD_REGION_ABBREVIATION,
     RiotLoRCard,
-    ORIGIN_REGION_ABBREVIATION
+    ORIGIN_REGION_ABBREVIATION, OriginRegionAbbreviation
 } from "../riot-assets/models-cards";
 import {DeckbuildingRules, DeckCard, LoRDeck} from "./models";
 import {
@@ -264,14 +264,35 @@ export function getAllCardsFromDeck(lorDeck: LoRDeck): DeckCard[] {
     return [].concat.apply([], Object.keys(lorDeck.cards).map((k: string) => _.get(lorDeck.cards, k)));
 }
 
-export function getCardMainRegionFromDeck(card: RiotLoRCard, lorDeck: LoRDeck): CardRegionAbbreviation {
-    const originRules = championOriginRules.filter(r => r.doesDeckMeetCondition(lorDeck)); // pode se encaixar em multiplas regras de origin
+/**
+ *
+ * @param card: card to get MainRegion
+ * @param lorDeck: if provided, used to get valid origin rules (via .cards) and mainFactions to consider
+ * @param factionsToConsider: if provided, does not use lorDeck.mainFactions to consider factions
+ */
+export function getCardMainRegionFromDeck(
+    card: RiotLoRCard,
+    lorDeck?: LoRDeck,
+    factionsToConsider?: Array<CardRegionAbbreviation | OriginRegionAbbreviation>
+): CardRegionAbbreviation | OriginRegionAbbreviation {
+    let originRules; // pode se encaixar em multiplas regras de origin
+    factionsToConsider = factionsToConsider ? factionsToConsider : []; // caso não seja passado, considera todas
 
-    if (originRules.length > 0 && originRules.some(r => r.doesCardMeetCondition(card))) {
-        return CARD_REGION_ABBREVIATION.RUNETERRA;
+    if (!!lorDeck) {
+        originRules = championOriginRules.filter(r => r.doesDeckMeetCondition(lorDeck));
+        if (factionsToConsider?.length === 0) {
+            factionsToConsider = lorDeck.mainFactions
+        }
     } else {
-        return getCardMainRegion(card, lorDeck.mainFactions.map(f => regionAbbreviationToRegionRef(f)));
+        originRules = championOriginRules;
     }
+    let rulesToConsider = [...regionRules, ...originRules] // todas as regras
+    factionsToConsider = factionsToConsider.length !== 0 ? factionsToConsider : rulesToConsider.map(r => r.abbreviation)
+
+    const rulesCardMeetCondition = rulesToConsider
+            .filter(rule => factionsToConsider?.includes(rule.abbreviation) && rule.doesCardMeetCondition(card)) // regras filtradas
+            // .reverse() // ao descomentar essa linha, dá prioridade às regras mais novas
+    return rulesCardMeetCondition[0].abbreviation;
 }
 
 /**
@@ -294,6 +315,7 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): {[
     // numero de cartas que podem estar em cada região
     const deckCards: DeckCard[] = getAllCardsFromDeck(lorDeck);
 
+    // adiciona a carta em TODAS as regiões que ela pode estar inclusa, NÃO SUBSTITUIR PELO método "getCardMainRegionFromDeck"
     //{ IO: 25, Evelynn: 21, PZ: 5, ...}
     deckCards.forEach((c: DeckCard) => {
         const rulesCardMeetCondition = [...regionRules, ...originRules];
@@ -319,11 +341,11 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): {[
     // Cria um novo objeto de "regionAbbrvQt" zerado
     let result: {[abbrv: string]: number} = Object.entries(regionAbbrvQt).reduce((r, [k, v]) => ({ ...r, [k]: 0 }), {});
     const mainRegions = Object.keys(regionAbbrvQt);
+
+    // Re-avalia as cartas para usar apenas as regras de criação do deck
     deckCards.forEach((c: DeckCard) => {
-        const rulesCardMeetCondition = [...regionRules, ...originRules] // todas as regras
-            .filter(rule => mainRegions.includes(rule.abbreviation) && rule.doesCardMeetCondition(c.card)) // regras filtradas
-            // .reverse() // ao descomentar essa linha, dá prioridade às regras mais novas
-        result[rulesCardMeetCondition[0].abbreviation] += c.count;
+        const cardMainRegionAbbrv = getCardMainRegionFromDeck(c.card, undefined, mainRegions as CardRegionAbbreviation[])
+        result[cardMainRegionAbbrv] += c.count;
     })
 
     return result
