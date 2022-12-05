@@ -348,6 +348,11 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): {[
         result[cardMainRegionAbbrv] += c.count;
     })
 
+    // Ordena do maior para o menor
+    result = Object.entries(result)
+        .sort(([, a], [, b]) => b - a)
+        .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+
     return result
 }
 
