@@ -331,9 +331,9 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): {[
         .sort(([, a], [, b]) => b - a)
         .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
 
-    // Remove as regiões que não são do interesse
+    // Remove as regiões que não são do interesse OU regiões vazias (eg. {SH: 40, DE: 0})
     Object.keys(regionAbbrvQt).forEach((k, index) => {
-        if (index >= maxRegions) {
+        if (index >= maxRegions || !regionAbbrvQt[k]) {
             delete regionAbbrvQt[k];
         }
     })
