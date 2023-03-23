@@ -169,6 +169,7 @@ export type RiotLorSet =
     | 'Set5'
     | 'Set6'
     | 'Set6cde'
+    | 'Set7'
 
 export function isRiotLorSet(variable: any): boolean {
     return [
@@ -179,7 +180,21 @@ export function isRiotLorSet(variable: any): boolean {
         'Set5',
         'Set6',
         'Set6cde',
+        'Set7',
     ].includes(`${variable}`);
+}
+
+export enum RIOT_LOR_FORMAT {
+    ETERNAL = "client_Formats_Eternal_name",
+    STANDARD = "client_Formats_Standard_name",
+}
+
+export type RiotLorFormat =
+    RIOT_LOR_FORMAT.ETERNAL
+    | RIOT_LOR_FORMAT.STANDARD
+
+export function isRiotLorFormat(variable: any): boolean {
+    return Object.values(RIOT_LOR_FORMAT).map(i => `${i}`).includes(`${variable}`);
 }
 
 export interface RiotLoRGlobalVocabTerm {

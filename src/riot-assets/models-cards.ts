@@ -5,7 +5,8 @@ import {
     RiotLorRarityRef,
     RiotLoRRegionRef,
     RiotLorSet,
-    RiotLorSpellSpeedRef
+    RiotLorSpellSpeedRef,
+    RiotLorFormat
 } from './models-globals';
 
 export interface RiotLoRCard {
@@ -39,6 +40,8 @@ export interface RiotLoRCard {
     type: string; // eg: 'Feitiço'
     collectible: boolean; // eg: true
     set: RiotLorSet; // eg: 'Set1'
+    formats?: string[]; // eg: ["Eterno", "Padrão" ]
+    formatRefs?: RiotLorFormat[] // eg: ["client_Formats_Eternal_name", "client_Formats_Standard_name" ]
 }
 
 export function isRiotLoRCard(object: any) {
