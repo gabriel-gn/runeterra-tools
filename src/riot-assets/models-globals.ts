@@ -197,6 +197,14 @@ export function isRiotLorFormat(variable: any): boolean {
     return Object.values(RIOT_LOR_FORMAT).map(i => `${i}`).includes(`${variable}`);
 }
 
+export function isRiotLorStandardFormat(variable: any): boolean {
+    if (Array.isArray(variable)) {
+        return variable.some(f => `${f}` === RIOT_LOR_FORMAT.STANDARD);
+    } else {
+        return `${variable}` === RIOT_LOR_FORMAT.STANDARD;
+    }
+}
+
 export interface RiotLoRGlobalVocabTerm {
     description: string;
     name: string;

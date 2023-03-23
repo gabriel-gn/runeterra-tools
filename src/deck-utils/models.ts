@@ -4,6 +4,7 @@ import {
     OriginRegionAbbreviation,
     RiotLoRCard
 } from "../riot-assets/models-cards";
+import {RiotLorFormat} from "../riot-assets/models-globals";
 
 export interface DeckbuildingRules {
     name: string,
@@ -44,7 +45,10 @@ export interface DeckStats {
 export interface UserDeck {
     title?: string;
     description?: string;
-    badges?: {tier?: string};
+    badges?: {
+        tier?: string
+        formats?: RiotLorFormat[]
+    };
     changedAt?: number;
     createdAt?: number;
     stats?: DeckStats;
