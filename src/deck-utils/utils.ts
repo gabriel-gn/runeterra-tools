@@ -356,11 +356,11 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): {[
     return result
 }
 
-export function generateDeckName(deck: LoRDeck) {
+export function generateDeckName(deck: LoRDeck): string {
     let name = '';
-    let champions: DeckCard[] = deck.cards.champions
+    let champions: DeckCard[] = deck?.cards?.champions ?? [];
     if (champions.length > 0) {
-        name = _.orderBy(champions, ['count', 'card.cardCode', 'card.set'], ['desc', 'asc'])
+        name = (_.orderBy(champions, ['count', 'card.cardCode', 'card.set'], ['desc', 'asc']) as DeckCard[])
             .slice(0, 2)
             .map((champion) => (champion as DeckCard)?.card?.name ?? '').join(' / ');
     } else {
