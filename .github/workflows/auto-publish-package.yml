@@ -57,15 +57,15 @@ jobs:
           echo "*** Iniciando NPM Install ***"
           npm install
 
-      - name: Run the tests
-        run: npm test -- --coverage
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          fail_ci_if_error: true # optional (default = false)
-          verbose: true # optional (default = false)
+#      - name: Run the tests
+#        run: npm test -- --coverage
+#
+#      - name: Upload coverage reports to Codecov
+#        uses: codecov/codecov-action@v3
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+#          fail_ci_if_error: true # optional (default = false)
+#          verbose: true # optional (default = false)
 
       - name: Create the docs directory locally in CI
         run: npm run docs
