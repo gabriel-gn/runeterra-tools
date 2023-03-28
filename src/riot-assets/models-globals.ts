@@ -160,38 +160,43 @@ export function isRiotLorRarityRef(variable: any): boolean {
     ].includes(`${variable}`);
 }
 
+export enum RIOT_LOR_SET {
+    SET_1 = 'Set1',
+    SET_2 = 'Set2',
+    SET_3 = 'Set3',
+    SET_4 = 'Set4',
+    SET_5 = 'Set5',
+    SET_6 = 'Set6',
+    SET_6_CDE = 'Set6cde',
+    SET_7 = 'Set7',
+}
+
 // [...new Set(temp1.map(c => c.set).flat(1))]
 export type RiotLorSet =
-    'Set1'
-    | 'Set2'
-    | 'Set3'
-    | 'Set4'
-    | 'Set5'
-    | 'Set6'
-    | 'Set6cde'
-    | 'Set7'
+    `${RIOT_LOR_SET.SET_1}`
+    | `${RIOT_LOR_SET.SET_2}`
+    | `${RIOT_LOR_SET.SET_3}`
+    | `${RIOT_LOR_SET.SET_4}`
+    | `${RIOT_LOR_SET.SET_5}`
+    | `${RIOT_LOR_SET.SET_6}`
+    | `${RIOT_LOR_SET.SET_6_CDE}`
+    | `${RIOT_LOR_SET.SET_7}`
 
 export function isRiotLorSet(variable: any): boolean {
-    return [
-        'Set1',
-        'Set2',
-        'Set3',
-        'Set4',
-        'Set5',
-        'Set6',
-        'Set6cde',
-        'Set7',
-    ].includes(`${variable}`);
+    return Object.values(RIOT_LOR_SET).map(i => `${i}`).includes(`${variable}`);
 }
 
 export enum RIOT_LOR_FORMAT {
     ETERNAL = "client_Formats_Eternal_name",
     STANDARD = "client_Formats_Standard_name",
+    COMMONS_ONLY = "client_Formats_CommonsOnly_name",
 }
 
+// [...new Set(cards.map(c => c.formatRefs).flat())]
 export type RiotLorFormat =
     RIOT_LOR_FORMAT.ETERNAL
     | RIOT_LOR_FORMAT.STANDARD
+    | RIOT_LOR_FORMAT.COMMONS_ONLY
 
 export function isRiotLorFormat(variable: any): boolean {
     return Object.values(RIOT_LOR_FORMAT).map(i => `${i}`).includes(`${variable}`);
