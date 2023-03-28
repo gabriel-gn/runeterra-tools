@@ -361,7 +361,7 @@ export function generateDeckName(deck: LoRDeck) {
     if (deck.cards.champions.length > 0) {
         name = _.orderBy(deck.cards.champions, ['count', 'card.cardCode', 'card.set'], ['desc', 'asc'])
             .slice(0, 2)
-            .map(champion => champion?.card?.name ?? '').join(' / ');
+            .map((champion: DeckCard) => champion?.card?.name ?? '').join(' / ');
     } else {
         name = 'No Champions';
     }
