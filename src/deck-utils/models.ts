@@ -36,6 +36,16 @@ export interface LoRDeck {
     factionCardsQt: { [faction: string]: number }; // {DE: 34, BC: 6, NX: 0, IO: 0, etc...}
 }
 
+export function isLoRDeck(object: any) {
+    return object.hasOwnProperty('code')
+        && object.hasOwnProperty('cards')
+        && object.hasOwnProperty('cardCostQt')
+        && object.hasOwnProperty('mainFactions')
+        && object.hasOwnProperty('factions')
+        && object.hasOwnProperty('essenceCost')
+        && object.hasOwnProperty('factionCardsQt')
+}
+
 export interface DeckStats {
     playRatePercent?: number;
     winRatePercent?: number;
