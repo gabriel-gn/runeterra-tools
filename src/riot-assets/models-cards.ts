@@ -1,12 +1,13 @@
 import {
     RIOT_LOR_REGION_REF,
     RIOT_LOR_SPELL_SPEED_REF,
+    RIOT_LOR_FORMAT,
     RiotLoRKeywordRef,
     RiotLorRarityRef,
     RiotLoRRegionRef,
     RiotLorSet,
     RiotLorSpellSpeedRef,
-    RiotLorFormat
+    RiotLorFormat,
 } from './models-globals';
 
 export interface RiotLoRCard {
@@ -17,7 +18,7 @@ export interface RiotLoRCard {
         fullAbsolutePath: string;
     }[];
     regions: string[]; // eg: ['Ionia', 'Ilhas das Sombras']
-    regionRefs: RiotLoRRegionRef[] | RIOT_LOR_REGION_REF[]; // eg: ['BandleCity', 'ShadowIsles']
+    regionRefs: (RiotLoRRegionRef | RIOT_LOR_REGION_REF)[]; // eg: ['BandleCity', 'ShadowIsles']
     attack: number; // eg: 3
     cost: number; // eg: 2
     health: number; // eg: 1
@@ -41,7 +42,7 @@ export interface RiotLoRCard {
     collectible: boolean; // eg: true
     set: RiotLorSet; // eg: 'Set1'
     formats?: string[]; // eg: ["Eterno", "Padrão" ]
-    formatRefs?: RiotLorFormat[] // eg: ["client_Formats_Eternal_name", "client_Formats_Standard_name" ]
+    formatRefs?: (RiotLorFormat | RIOT_LOR_FORMAT)[] // eg: ["client_Formats_Eternal_name", "client_Formats_Standard_name" ]
 }
 
 export function isRiotLoRCard(object: any) {

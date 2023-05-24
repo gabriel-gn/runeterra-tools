@@ -4,7 +4,7 @@ import {
     OriginRegionAbbreviation,
     RiotLoRCard
 } from "../riot-assets/models-cards";
-import {RiotLorFormat} from "../riot-assets/models-globals";
+import {RIOT_LOR_FORMAT, RiotLorFormat} from "../riot-assets/models-globals";
 
 export interface DeckbuildingRules {
     name: string,
@@ -30,10 +30,11 @@ export interface LoRDeck {
     cardCostQt: {
         [cardCost: number]: number
     };
-    mainFactions: CardRegionAbbreviation[] | CARD_REGION_ABBREVIATION[];
-    factions: CardRegionAbbreviation[] | CARD_REGION_ABBREVIATION[];
+    mainFactions: (CardRegionAbbreviation | CARD_REGION_ABBREVIATION)[];
+    factions: (CardRegionAbbreviation | CARD_REGION_ABBREVIATION)[];
     essenceCost: number;
     factionCardsQt: { [faction: string]: number }; // {DE: 34, BC: 6, NX: 0, IO: 0, etc...}
+    formats: (RiotLorFormat | RIOT_LOR_FORMAT)[];
 }
 
 export function isLoRDeck(object: any) {
@@ -44,6 +45,7 @@ export function isLoRDeck(object: any) {
         && object.hasOwnProperty('factions')
         && object.hasOwnProperty('essenceCost')
         && object.hasOwnProperty('factionCardsQt')
+        && object.hasOwnProperty('formats')
 }
 
 export interface DeckStats {

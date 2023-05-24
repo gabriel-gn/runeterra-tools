@@ -1,12 +1,16 @@
+import {DeckCard, isLoRDeck, LoRDeck} from "../deck-utils/models";
+import {intersection} from "lodash";
+import {RiotLoRCard} from "./models-cards";
+
 // [...new Set(cards.map(c => c.keywordRefs).flat(1))]
-export type RiotLoRKeywordRef =
-    'Attach'
+export type RiotLoRKeywordRef = 'Attach'
     | 'Attune'
     | 'Augment'
     | 'AuraVisualFakeKeyword'
     | 'Autoplay'
     | 'Barrier'
     | 'Boon'
+    | 'Brash'
     | 'Burst'
     | 'CantBlock'
     | 'Challenger'
@@ -54,6 +58,7 @@ export function isRiotLoRKeywordRef(variable: any): boolean {
         'Autoplay',
         'Barrier',
         'Boon',
+        'Brash',
         'Burst',
         'CantBlock',
         'Challenger',
@@ -208,6 +213,15 @@ export function isRiotLorStandardFormat(variable: any): boolean {
     } else {
         return `${variable}` === RIOT_LOR_FORMAT.STANDARD;
     }
+}
+
+export function getRiotLorDeckFormats(deck: LoRDeck): RiotLorFormat[] {
+    const deckCards: RiotLoRCard[] = Object.keys(deck.cards)
+        // @ts-ignore
+        .map(k => deck.cards[k].map((c: DeckCard) => c.card))
+        .flat()
+    const formatRefs: RiotLorFormat[] = intersection(...deckCards.map(c => c.formatRefs));
+    return formatRefs;
 }
 
 export interface RiotLoRGlobalVocabTerm {
