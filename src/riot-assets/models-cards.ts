@@ -85,6 +85,8 @@ export enum ORIGIN_REGION_ABBREVIATION {
     VARUS = "Varus",
     AATROX = "Aatrox",
     RYZE = "RYZE",
+    NEEKO = "Neeko",
+    POROKING = "POROKING",
 }
 
 export type OriginRegionAbbreviation =
@@ -96,6 +98,8 @@ export type OriginRegionAbbreviation =
     | `${ORIGIN_REGION_ABBREVIATION.VARUS}`
     | `${ORIGIN_REGION_ABBREVIATION.AATROX}`
     | `${ORIGIN_REGION_ABBREVIATION.RYZE}`
+    | `${ORIGIN_REGION_ABBREVIATION.NEEKO}`
+    | `${ORIGIN_REGION_ABBREVIATION.POROKING}`
 
 export function isOriginRegionAbbreviation(variable: any): boolean {
     return Object.values(ORIGIN_REGION_ABBREVIATION).map(i => `${i}`).includes(`${variable}`);

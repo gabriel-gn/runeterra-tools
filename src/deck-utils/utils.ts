@@ -258,6 +258,51 @@ export const championOriginRules: DeckbuildingRules[] = [
             );
         },
     },
+    {
+        name: 'Many-Shaped Jungle Friends',
+        abbreviation: ORIGIN_REGION_ABBREVIATION.NEEKO,
+        doesDeckMeetCondition: (lorDeck: LoRDeck) => {
+            // 07RU012 is "Neeko"'s code
+            return lorDeck.cards.champions.some(c => c.card.cardCode === '07RU012');
+        },
+        doesCardMeetCondition: (card: RiotLoRCard) => {
+            const neekoSubtypes = [
+                'BIRD',
+                'CAT',
+                'DOG',
+                'ELNUK',
+                'FAE',
+                'REPTILE',
+                'SPIDER',
+                'AVE', // pt_br
+                'FELINO', // pt_br
+                'CANINO', // pt_br
+                'FADA', // pt_br
+                'RÉPTIL', // pt_br
+                'ARANHA', // pt_br
+            ];
+            return card.cardCode === '07RU012' || (
+                card.subtypes.some(s => neekoSubtypes.some(d => d.includes(s.toUpperCase())))
+            );
+        },
+    },
+    {
+        name: "The Poro King's Decree",
+        abbreviation: ORIGIN_REGION_ABBREVIATION.POROKING,
+        doesDeckMeetCondition: (lorDeck: LoRDeck) => {
+            // 07RU015 is "Poro King"'s code
+            return lorDeck.cards.champions.some(c => c.card.cardCode === '07RU015');
+        },
+        doesCardMeetCondition: (card: RiotLoRCard) => {
+            const kingPoroSubtypes = [
+                'PORO',
+            ];
+            return card.cardCode === '07RU015'
+                || (card.name.toUpperCase().includes('PORO'))
+                || (card.subtypes.some(s => kingPoroSubtypes.some(d => d.includes(s.toUpperCase()))))
+            ;
+        },
+    },
 ];
 
 export function getAllCardsFromDeck(lorDeck: LoRDeck): DeckCard[] {
