@@ -64,7 +64,7 @@ export enum CHAMPION_CARD_CODE {
     ORNN = '06FR011',
     PANTHEON = '05MT003',
     POPPY = '05BC041',
-    PORO_KING = '06RU026',
+    PORO_KING = '06RU015',
     PYKE = '04BW005',
     QUINN = '02DE006',
     REKSAI = '04SH019',
