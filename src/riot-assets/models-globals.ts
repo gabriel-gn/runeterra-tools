@@ -174,6 +174,7 @@ export enum RIOT_LOR_SET {
     SET_6 = 'Set6',
     SET_6_CDE = 'Set6cde',
     SET_7 = 'Set7',
+    SET_7_B = 'Set7b',
 }
 
 // [...new Set(temp1.map(c => c.set).flat(1))]
@@ -186,6 +187,7 @@ export type RiotLorSet =
     | `${RIOT_LOR_SET.SET_6}`
     | `${RIOT_LOR_SET.SET_6_CDE}`
     | `${RIOT_LOR_SET.SET_7}`
+    | `${RIOT_LOR_SET.SET_7_B}`
 
 export function isRiotLorSet(variable: any): boolean {
     return Object.values(RIOT_LOR_SET).map(i => `${i}`).includes(`${variable}`);
