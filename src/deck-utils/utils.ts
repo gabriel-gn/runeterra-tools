@@ -166,6 +166,7 @@ export const championOriginRules: DeckbuildingRules[] = [
                 '06SI018',
                 '06PZ025',
                 '06BW018',
+                '07BW033',
             ];
             return card.cardCode === '06RU025' || (
                 evelynnCards.includes(card.cardCode)
