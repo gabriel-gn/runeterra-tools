@@ -6,7 +6,7 @@ import {
 } from "../riot-assets/models-cards";
 import {RIOT_LOR_FORMAT, RiotLorFormat} from "../riot-assets/models-globals";
 
-export interface DeckbuildingRules {
+export interface DeckbuildingRule {
     name: string,
     abbreviation: CardRegionAbbreviation | OriginRegionAbbreviation // as described in riot globals.regions
     doesDeckMeetCondition: (lorDeck: LoRDeck) => boolean;

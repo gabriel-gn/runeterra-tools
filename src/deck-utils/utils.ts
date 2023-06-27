@@ -4,7 +4,7 @@ import {
     RiotLoRCard,
     ORIGIN_REGION_ABBREVIATION, OriginRegionAbbreviation
 } from "../riot-assets/models-cards";
-import {DeckbuildingRules, DeckCard, LoRDeck} from "./models";
+import {DeckbuildingRule, DeckCard, LoRDeck} from "./models";
 import {
     getCardMainRegion, getCardType,
     regionAbbreviationToRegionRef, regionRefToRegionAbbreviation
@@ -13,7 +13,7 @@ import _ from "lodash";
 import {RIOT_LOR_REGION_REF, RIOT_LOR_SPELL_SPEED_REF} from "../riot-assets/models-globals";
 import {CARD_TYPE} from "../card-utils/models";
 
-export const regionRules: DeckbuildingRules[] = [
+export const regionRules: DeckbuildingRule[] = [
     {
         name: 'BandleCity',
         abbreviation: CARD_REGION_ABBREVIATION.BANDLE_CITY,
@@ -116,7 +116,7 @@ export const regionRules: DeckbuildingRules[] = [
     }
 ]
 
-export const championOriginRules: DeckbuildingRules[] = [
+export const championOriginRules: DeckbuildingRule[] = [
     {
         name: 'The Virtuoso',
         abbreviation: ORIGIN_REGION_ABBREVIATION.JHIN,

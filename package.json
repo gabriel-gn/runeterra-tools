@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "prepare-environment": "npm install && npm install -g ts-node typescript '@types/node'",
-    "execute": "ts-node src/execute.ts",
+    "tsnode": "ts-node",
+    "execute": "npm run tsnode -- scripts/generate-origin-deckbuilding-rules.ts",
     "test": "jest --coverage",
     "build": "rm -rf dist && tsc",
     "docs": "typedoc --options ./typedoc.json --tsconfig ./tsconfig.json",
@@ -20,15 +21,20 @@
   "devDependencies": {
     "@types/expect": "^24.3.0",
     "@types/jest": "^26.0.24",
+    "@types/shelljs": "^0.8.12",
     "jest": "^26.6.3",
+    "shelljs": "^0.8.5",
     "ts-jest": "^26.5.6",
+    "ts-node": "^10.9.1",
     "typedoc": "^0.23.18",
     "typescript": "^4.3.5"
   },
   "keywords": [],
   "dependencies": {
     "@types/lodash": "^4.14.192",
+    "axios": "^1.4.0",
     "lodash": "^4.17.21",
-    "lor-deckcodes-ts": "^1.1.0"
+    "lor-deckcodes-ts": "^1.1.0",
+    "rxjs": "^7.8.1"
   }
 }
