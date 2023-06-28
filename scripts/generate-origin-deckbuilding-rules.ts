@@ -29,11 +29,9 @@ const championOriginRules: deckbuildingRuleParameter[] = [
         championCode: '06RU002',
         condition: (card: RiotLoRCard) => {
             // Jhin can put in deck any follower with skill
-            return card.cardCode === '06RU002' || (
-                getCardType(card) === CARD_TYPE.FOLLOWER
+            return getCardType(card) === CARD_TYPE.FOLLOWER
                 && card?.associatedCards
-                && card.associatedCards.some((c: DeckCard) => c.card.keywordRefs.includes('Skill'))
-            );
+                && card?.associatedCards?.some((c: RiotLoRCard) => c.keywordRefs.includes('Skill'));
         },
     },
     {
@@ -42,9 +40,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
         championCode: '06RU001',
         condition: (card: RiotLoRCard) => {
             // 06RU001T3 is "chime"'s code
-            return card.cardCode === '06RU001' || (
-                card.associatedCardRefs.includes('06RU001T3')
-            );
+            return card.associatedCardRefs.includes('06RU001T3');
         },
     },
     {
@@ -52,21 +48,8 @@ const championOriginRules: deckbuildingRuleParameter[] = [
         abbreviation: ORIGIN_REGION_ABBREVIATION.EVELYNN,
         championCode: '06RU025',
         condition: (card: RiotLoRCard) => {
-            // List all hust invoking cards
-            const evelynnCards = [
-                '06RU025',
-                '06SI020',
-                '06DE030',
-                '06SI019',
-                '06SH034',
-                '06SI018',
-                '06PZ025',
-                '06BW018',
-                '07BW033',
-            ];
-            return card.cardCode === '06RU025' || (
-                evelynnCards.includes(card.cardCode)
-            );
+            // List all husk invoking cards
+            return card.description.includes('husk');
         },
     },
     {
@@ -77,11 +60,8 @@ const championOriginRules: deckbuildingRuleParameter[] = [
             // "CULTIST" is kayn's deckbuilding condition
             const cultistSubtypeLanguages = [
                 'CULTIST', // en_us
-                'CULTISTA', // pt_br
             ];
-            return card.cardCode === '06RU005' || (
-                card.subtypes.some(s => cultistSubtypeLanguages.some(c => c.includes(s)))
-            );
+            return card.subtypes.some(s => cultistSubtypeLanguages.some(c => c.includes(s)));
         },
     },
     {
@@ -92,11 +72,8 @@ const championOriginRules: deckbuildingRuleParameter[] = [
             // "WEAPONMASTER" is jax's deckbuilding condition
             const weaponmasterSubtypeLanguages = [
                 'WEAPONMASTER', // en_us
-                'MESTRE DE ARMAS', // pt_br
             ];
-            return card.cardCode === '06RU008' || (
-                card.subtypes.some(s => weaponmasterSubtypeLanguages.some(c => c.includes(s)))
-            );
+            return card.subtypes.some(s => weaponmasterSubtypeLanguages.some(c => c.includes(s)));
         },
     },
     {
@@ -107,11 +84,8 @@ const championOriginRules: deckbuildingRuleParameter[] = [
             // "CULTIST" is varus's deckbuilding condition
             const cultistSubtypeLanguages = [
                 'CULTIST', // en_us
-                'CULTISTA', // pt_br
             ];
-            return card.cardCode === '06RU009' || (
-                card.subtypes.some(s => cultistSubtypeLanguages.some(c => c.includes(s)))
-            );
+            return card.subtypes.some(s => cultistSubtypeLanguages.some(c => c.includes(s)));
         },
     },
     {
@@ -119,10 +93,9 @@ const championOriginRules: deckbuildingRuleParameter[] = [
         abbreviation: ORIGIN_REGION_ABBREVIATION.RYZE,
         championCode: '06RU006',
         condition: (card: RiotLoRCard) => {
-            return card.cardCode === '06RU006' || (
-                card.spellSpeedRef === RIOT_LOR_SPELL_SPEED_REF.BURST
-                // TODO checar se a spell é target
-            );
+            return card.spellSpeedRef === RIOT_LOR_SPELL_SPEED_REF.BURST
+            && card.description.includes('ally') === false
+            && card.description.includes('enemy') === false
         },
     },
     {
@@ -133,11 +106,8 @@ const championOriginRules: deckbuildingRuleParameter[] = [
             // "DARKIN" is aatrox's deckbuilding condition
             const darkinSubtypeLanguages = [
                 'DARKIN', // en_us
-                'DARKIN', // pt_br
             ];
-            return card.cardCode === '06RU026' || (
-                card.subtypes.some(s => darkinSubtypeLanguages.some(d => d.includes(s)))
-            );
+            return card.subtypes.some(s => darkinSubtypeLanguages.some(d => d.includes(s)));
         },
     },
     {
@@ -153,15 +123,8 @@ const championOriginRules: deckbuildingRuleParameter[] = [
                 'FAE',
                 'REPTILE',
                 'SPIDER',
-                'AVE', // pt_br
-                'FELINO', // pt_br
-                'CANINO', // pt_br
-                'FADA', // pt_br
-                'RÉPTIL', // pt_br
-                'ARANHA', // pt_br
             ];
-            return card.cardCode === '07RU012' || (
-                card.subtypes.some(s => neekoSubtypes.some(d => d.includes(s.toUpperCase())))
+            return card.subtypes.some(s => neekoSubtypes.some(d => d.includes(s.toUpperCase()))
             );
         },
     },
@@ -173,10 +136,9 @@ const championOriginRules: deckbuildingRuleParameter[] = [
             const kingPoroSubtypes = [
                 'PORO',
             ];
-            return card.cardCode === '07RU015'
-                || (card.name.toUpperCase().includes('PORO'))
+            return card.name.toUpperCase().includes('PORO')
                 || (card.subtypes.some(s => kingPoroSubtypes.some(d => d.includes(s.toUpperCase()))))
-                ;
+            ;
         },
     },
 ];
@@ -211,24 +173,24 @@ function generateDeckbuildingRuleText(allLorCards: RiotLoRCard[]): string {
 }
 
 function generateOriginDeckbuildingCode(allLorCards: RiotLoRCard[]) {
-    const filepath = join(__dirname, '../test.ts');
+    const filepath = join(__dirname, '../src/deck-utils/origin-deckbuilding-rules.ts');
     writeFileSync(filepath, `
-    // this is an auto-generated file from ${basename(__filename)}
-    import {
-        CARD_TYPE,
-        DeckbuildingRule,
-        DeckCard,
-        getCardType,
-        LoRDeck,
-        ORIGIN_REGION_ABBREVIATION, RIOT_LOR_SPELL_SPEED_REF,
-        RiotLoRCard
-    } from "../src";
-
-    export const championOriginRules: DeckbuildingRule[] = [
-        ${generateDeckbuildingRuleText(allLorCards)}
-    ]
+        // this is an auto-generated file from ${basename(__filename)}
+        import {
+            CARD_TYPE,
+            DeckbuildingRule,
+            DeckCard,
+            getCardType,
+            LoRDeck,
+            ORIGIN_REGION_ABBREVIATION, RIOT_LOR_SPELL_SPEED_REF,
+            RiotLoRCard
+        } from "../../src";
+    
+        export const originDeckbuildingRules: DeckbuildingRule[] = [
+            ${generateDeckbuildingRuleText(allLorCards)}
+        ]
     `
-        , {flag: 'w'});
+    , {flag: 'w'});
     exec(`npx prettier --write ${filepath}`)
 }
 
@@ -236,8 +198,14 @@ const allLorCards$ = from(axios.get(`https://api.lordecks.com/riot-assets/cards`
     .pipe(map(r => r.data));
 
 allLorCards$.pipe(
-    tap(cards => {
-        console.log(cards[0]);
+    // esse map faz com que todas as cartas possuam as cartas associadas
+    map((allCards: RiotLoRCard[]) => {
+        allCards.forEach((card: RiotLoRCard) => {
+            card.associatedCards = allCards.filter(c => card.associatedCardRefs.includes(c.cardCode)) ?? [];
+       });
+        return allCards;
+    }),
+    tap((cards: RiotLoRCard[]) => {
         generateOriginDeckbuildingCode(cards);
     })
 ).subscribe()
