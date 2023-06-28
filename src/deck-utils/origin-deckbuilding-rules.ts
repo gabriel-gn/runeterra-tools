@@ -1,10 +1,17 @@
 // this is an auto-generated file from generate-origin-deckbuilding-rules.ts
 import {
-  DeckbuildingRule,
-  DeckCard,
-  LoRDeck,
+  CARD_REGION_ABBREVIATION,
+  ORIGIN_REGION_ABBREVIATION,
   RiotLoRCard,
-} from "../../src";
+} from "../riot-assets/models-cards";
+import { DeckbuildingRule, DeckCard, LoRDeck } from "./models";
+import {
+  RIOT_LOR_REGION_REF,
+  RIOT_LOR_SPELL_SPEED_REF,
+} from "../riot-assets/models-globals";
+import { getAllCardsFromDeck } from "./utils";
+import { CARD_TYPE } from "../card-utils/models";
+import { getCardType } from "../card-utils/utils";
 
 export const originDeckbuildingRules: DeckbuildingRule[] = [
   {

@@ -42,7 +42,11 @@ export function getCardMainRegionFromDeck(
     const rulesCardMeetCondition = rulesToConsider
         .filter(rule => factionsToConsider?.includes(rule.abbreviation) && rule.doesCardMeetCondition(card)) // regras filtradas
     // .reverse() // ao descomentar essa linha, dá prioridade às regras mais novas
-    return rulesCardMeetCondition[0].abbreviation;
+    try {
+        return rulesCardMeetCondition[0].abbreviation;
+    } catch (e) {
+        return CARD_REGION_ABBREVIATION.RUNETERRA;
+    }
 }
 
 /**

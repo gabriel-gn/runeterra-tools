@@ -176,15 +176,12 @@ function generateOriginDeckbuildingCode(allLorCards: RiotLoRCard[]) {
     const filepath = join(__dirname, '../src/deck-utils/origin-deckbuilding-rules.ts');
     writeFileSync(filepath, `
         // this is an auto-generated file from ${basename(__filename)}
-        import {
-            CARD_TYPE,
-            DeckbuildingRule,
-            DeckCard,
-            getCardType,
-            LoRDeck,
-            ORIGIN_REGION_ABBREVIATION, RIOT_LOR_SPELL_SPEED_REF,
-            RiotLoRCard
-        } from "../../src";
+        import {CARD_REGION_ABBREVIATION, ORIGIN_REGION_ABBREVIATION, RiotLoRCard} from "../riot-assets/models-cards";
+        import {DeckbuildingRule, DeckCard, LoRDeck} from "./models";
+        import {RIOT_LOR_REGION_REF, RIOT_LOR_SPELL_SPEED_REF} from "../riot-assets/models-globals";
+        import {getAllCardsFromDeck} from "./utils";
+        import {CARD_TYPE} from "../card-utils/models";
+        import {getCardType} from "../card-utils/utils";
     
         export const originDeckbuildingRules: DeckbuildingRule[] = [
             ${generateDeckbuildingRuleText(allLorCards)}
