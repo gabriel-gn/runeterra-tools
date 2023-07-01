@@ -49,7 +49,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
         championCode: '06RU025',
         condition: (card: RiotLoRCard) => {
             // List all husk invoking cards
-            return card.description.includes('husk');
+            return card.description.toLowerCase().includes('husk');
         },
     },
     {

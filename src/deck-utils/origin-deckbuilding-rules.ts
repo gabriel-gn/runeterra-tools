@@ -137,7 +137,19 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
-      const champion06RU025Cards = ["06RU025"];
+      const champion06RU025Cards = [
+        "06RU025",
+        "06RU025T14",
+        "06RU025T5",
+        "06PZ025",
+        "06BW018",
+        "06SH034",
+        "06DE030",
+        "06SI020",
+        "06SI018",
+        "06SI019",
+        "07BW033",
+      ];
       return champion06RU025Cards.includes(card.cardCode);
     },
   },
