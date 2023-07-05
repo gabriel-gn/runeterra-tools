@@ -31,7 +31,12 @@ export function getCardMainRegionFromDeck(
     if (!!lorDeck) {
         originRules = originDeckbuildingRules.filter(r => r.doesDeckMeetCondition(lorDeck));
         if (factionsToConsider?.length === 0) {
-            factionsToConsider = lorDeck.mainFactions
+            if (lorDeck.mainFactions.length > 0) {
+                factionsToConsider = lorDeck.mainFactions
+            }
+            else if (lorDeck.factions.length > 0) {
+                factionsToConsider = lorDeck.factions
+            }
         }
     } else {
         originRules = originDeckbuildingRules;
@@ -67,8 +72,8 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): { 
 
     // adiciona a carta em TODAS as regiões que ela pode estar inclusa, NÃO SUBSTITUIR PELO método "getCardMainRegionFromDeck"
     //{ IO: 25, Evelynn: 21, PZ: 5, ...}
+    const rulesCardMeetCondition = [...regionDeckbuildingRules, ...originRules];
     deckCards.forEach((c: DeckCard) => {
-        const rulesCardMeetCondition = [...regionDeckbuildingRules, ...originRules];
         rulesCardMeetCondition
             .filter(rule => rule.doesCardMeetCondition(c.card))
             .forEach(rule => {
@@ -76,10 +81,31 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): { 
             });
     })
 
+    const reorderRegionAbbrvQtAsc = () => {
+        regionAbbrvQt = Object.entries(regionAbbrvQt)
+            .sort(([, a], [, b]) => b - a)
+            .reduce((r, [k, v]) => ({...r, [k]: v}), {});
+    }
+
     // Ordena do maior para o menor
-    regionAbbrvQt = Object.entries(regionAbbrvQt)
-        .sort(([, a], [, b]) => b - a)
-        .reduce((r, [k, v]) => ({...r, [k]: v}), {});
+    reorderRegionAbbrvQtAsc();
+
+    // caso todas cartas de determinada regra pertençam também a outra regra, considera apenas a primeira!!
+    // CUDACBABB4AQMCRLAEDAAKIBA4AAKAIHBQHQGAIBBAIBSBIBAEAAYAIBAQKACBAHGEAQMABBAEDACFIGAEAQEBIBAEBSEAIBAUSQCAYECMAQIAAIAECQVIAB
+    // eg: Poro King / Demacia faz com que as regiões consideradas do deck sejam POROKING/FR, pois qt = {"POROKING": 29, "FR": 15, "DE: 11"}
+    deckCards.forEach(c => {
+        let mostCardsRegions = Object.keys(regionAbbrvQt);
+        const cardRules = rulesCardMeetCondition.filter(rule => rule.doesCardMeetCondition(c.card))
+            .sort((a, b) => {
+                return mostCardsRegions.indexOf(a.abbreviation) - mostCardsRegions.indexOf(b.abbreviation);
+            });
+        cardRules.forEach((rule, index) => {
+            if (index !== 0) {
+                regionAbbrvQt[rule.abbreviation] -= c.count;
+            }
+        })
+    })
+    reorderRegionAbbrvQtAsc();
 
     // Remove as regiões que não são do interesse OU regiões vazias (eg. {SH: 40, DE: 0})
     Object.keys(regionAbbrvQt).forEach((k, index) => {
