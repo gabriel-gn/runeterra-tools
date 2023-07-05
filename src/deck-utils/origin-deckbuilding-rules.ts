@@ -708,6 +708,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
         "01FR043T1",
         "01SI037",
         "02BW010",
+        "02FR003",
         "03MT039",
         "03PZ019",
         "03PZ018",

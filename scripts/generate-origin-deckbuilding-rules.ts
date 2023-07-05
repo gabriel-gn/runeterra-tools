@@ -136,8 +136,9 @@ const championOriginRules: deckbuildingRuleParameter[] = [
             const kingPoroSubtypes = [
                 'PORO',
             ];
-            return card.name.toUpperCase().includes('PORO')
-                || (card.subtypes.some(s => kingPoroSubtypes.some(d => d.includes(s.toUpperCase()))))
+            return card.name.toUpperCase().includes('PORO') // has poro on name
+                || (card.subtypes.some(s => kingPoroSubtypes.some(d => d.includes(s.toUpperCase())))) // is poro subtype
+                || card.associatedCardRefs.includes('01FR016') // has poro snax as associated card
             ;
         },
     },
