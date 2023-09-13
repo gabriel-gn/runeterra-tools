@@ -16,7 +16,7 @@ export interface RiotLoRCard {
         fullAbsolutePath: string;
     }[];
     regions: string[]; // eg: ['Ionia', 'Ilhas das Sombras']
-    regionRefs: (RiotLoRRegionRef | RIOT_LOR_REGION_REF | string)[]; // eg: ['BandleCity', 'ShadowIsles']
+    regionRefs: (RiotLorRegionRef | RIOT_LOR_REGION_REF | string)[]; // eg: ['BandleCity', 'ShadowIsles']
     attack: number; // eg: 3
     cost: number; // eg: 2
     health: number; // eg: 1
