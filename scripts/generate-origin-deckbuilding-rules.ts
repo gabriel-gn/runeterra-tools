@@ -21,6 +21,17 @@ interface deckbuildingRuleParameter {
     condition: (card: RiotLoRCard) => boolean
 }
 
+const allLorCards$ = from(axios.get(`https://api.lordecks.com/riot-assets/cards`))
+    .pipe(
+        map(r => r.data),
+        // esse segundo map faz com que todas as cartas possuam as cartas associadas
+        map((allCards: RiotLoRCard[]) => {
+            allCards.forEach((card: RiotLoRCard) => {
+                card.associatedCards = allCards.filter(c => card.associatedCardRefs.includes(c.cardCode)) ?? [];
+            });
+            return allCards;
+        })
+    );
 
 const championOriginRules: deckbuildingRuleParameter[] = [
     {
@@ -192,17 +203,7 @@ function generateOriginDeckbuildingCode(allLorCards: RiotLoRCard[]) {
     exec(`npx prettier --write ${filepath}`)
 }
 
-const allLorCards$ = from(axios.get(`https://api.lordecks.com/riot-assets/cards`))
-    .pipe(map(r => r.data));
-
 allLorCards$.pipe(
-    // esse map faz com que todas as cartas possuam as cartas associadas
-    map((allCards: RiotLoRCard[]) => {
-        allCards.forEach((card: RiotLoRCard) => {
-            card.associatedCards = allCards.filter(c => card.associatedCardRefs.includes(c.cardCode)) ?? [];
-       });
-        return allCards;
-    }),
     tap((cards: RiotLoRCard[]) => {
         generateOriginDeckbuildingCode(cards);
     })
