@@ -1,6 +1,6 @@
 {
   "name": "@gabrielgn-test/runeterra-tools",
-  "version": "0.0.38",
+  "version": "0.1.0",
   "description": "Legends of runeterra utilities for personal usage",
   "author": "Gabriel Nogueira",
   "license": "MIT",
@@ -13,8 +13,10 @@
     "prepare-environment": "npm install && npm install -g ts-node typescript '@types/node'",
     "tsnode": "ts-node",
     "execute": "npm run tsnode -- scripts/generate-origin-deckbuilding-rules.ts",
+    "auto-update": "npm run tsnode -- scripts/auto-update-riot.ts",
     "test": "jest --coverage",
-    "build": "rm -rf dist && tsc",
+    "prebuild": "rm -rf dist && npm run auto-update",
+    "build": "tsc",
     "docs": "typedoc --options ./typedoc.json --tsconfig ./tsconfig.json",
     "deploy-npm": "npm publish --access=public"
   },
