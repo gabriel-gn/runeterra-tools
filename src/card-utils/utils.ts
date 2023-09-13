@@ -7,7 +7,7 @@ import {
 } from "../riot-assets/models-cards";
 import {RIOT_LOR_REGION_REF, RiotLorRarityRef, RiotLorRegionRef} from "../riot-assets/models-globals";
 import {get, intersection} from "lodash";
-import {CardType} from "./models";
+import {CARD_TYPE, CardType} from "./models";
 
 /**
  * get "NX" from a card with cardCode "01NX005"
@@ -97,23 +97,23 @@ export function getCardMainRegion(card: RiotLoRCard, regionRefs: RiotLorRegionRe
  */
 export function getCardType(card: RiotLoRCard): CardType {
     if (!!card.spellSpeedRef) {
-        return 'Spell';
+        return CARD_TYPE.SPELL;
     } else if (
         card.keywordRefs &&
         card.keywordRefs.length > 0 &&
         card.keywordRefs.includes('LandmarkVisualOnly')
     ) {
-        return 'Landmark';
+        return CARD_TYPE.LANDMARK;
     } else if (
         card.keywordRefs &&
         card.keywordRefs.length > 0 &&
         card.keywordRefs.includes('Equipment')
     ) {
-        return 'Equipment';
+        return CARD_TYPE.EQUIPMENT;
     } else if (card.rarityRef === 'Champion') {
-        return 'Champion';
+        return CARD_TYPE.CHAMPION;
     } else {
-        return 'Follower';
+        return CARD_TYPE.FOLLOWER;
     }
 }
 
