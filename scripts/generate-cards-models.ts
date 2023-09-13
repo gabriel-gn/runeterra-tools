@@ -9,7 +9,7 @@ import {
     LoRDeck,
     ORIGIN_REGION_ABBREVIATION,
     RIOT_LOR_SPELL_SPEED_REF,
-    RiotLoRCard, RiotLoRKeywordRef, RiotLoRRegionRef, RiotLorSpellSpeedRef
+    RiotLoRCard, RiotLorSpellSpeedRef
 } from "../src";
 import axios, {AxiosResponse} from 'axios';
 import {from, map, Observable, tap} from "rxjs";
