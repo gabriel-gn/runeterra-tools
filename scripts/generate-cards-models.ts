@@ -35,11 +35,17 @@ const allLorCards$ = from(axios.get(`https://api.lordecks.com/riot-assets/cards`
         })
     );
 
+export const uniqueBy = <T>( uniqueKey: keyof T, objects: T[]): T[] => {
+    const ids = objects.map(object => object[uniqueKey]);
+    return objects.filter((object, index) => !ids.includes(object[uniqueKey], index + 1));
+}
+
 function generateChampionsCode(cards: RiotLoRCard[]) {
         let champs = cards.filter(c => c.cardCode.length === 7 && c.rarityRef === 'Champion')
+        champs = uniqueBy('name', champs);
         const enumName = `CHAMPION_CARD_CODE`;
         const typeName = `ChampionCardCode`;
-        champs = champs.sort((a, b) => {
+        champs = champs.sort((a: RiotLoRCard, b: RiotLoRCard) => {
             if (a.name < b.name) { return -1; }
             if (a.name > b.name) { return 1; }
             return 0;
@@ -78,7 +84,8 @@ function generateCardTypeCode(): string {
             EQUIPMENT = 'Equipment',
         }
         
-        export type CardType = \`${CARD_TYPE.CHAMPION}\`
+        export type CardType = 
+            | \`\${CARD_TYPE.CHAMPION}\`
             | \`\${CARD_TYPE.FOLLOWER}\`
             | \`\${CARD_TYPE.SPELL}\`
             | \`\${CARD_TYPE.LANDMARK}\`

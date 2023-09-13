@@ -473,7 +473,7 @@ function generateRiotGlobalsInterfaceCode() {
 }
 
 function writeContentToFile(content: string = '') {
-    const filepath = join(__dirname, '../src/riot-assets/riot-globals.ts');
+    const filepath = join(__dirname, '../src/riot-assets/models-globals.ts');
     writeFileSync(filepath, content, {flag: 'w'});
     exec(`npx prettier --write ${filepath}`)
 }

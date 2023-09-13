@@ -2,7 +2,7 @@ import {exec} from "shelljs";
 
 const scriptsToExecute = [
     'scripts/generate-origin-deckbuilding-rules.ts',
-    'scripts/generate-champions.ts',
+    'scripts/generate-cards-models.ts',
     'scripts/generate-riot-globals.ts'
 ]
 
