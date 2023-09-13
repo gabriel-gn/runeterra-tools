@@ -13,6 +13,7 @@ import {
     teemoMock,
     twinDisciplinesMock
 } from "../mocks/card-reference.mock";
+import {RiotLorRegionRef} from "../riot-assets/models-globals";
 
 describe("test card-utils utils.ts", () => {
     it("should getCardRegionAbbreviation from CardCode", () => {
@@ -44,7 +45,7 @@ describe("test card-utils utils.ts", () => {
     });
 
     it("should getCardMainRegion from a list of region refs", () => {
-        expect(getCardMainRegion(ionianHookmasterMock, ["Demacia", "Ionia"])).toBe('IO');
+        expect(getCardMainRegion(ionianHookmasterMock, ["Demacia", "Ionia"] as RiotLorRegionRef[])).toBe('IO');
     });
 
     //'Champion' | 'Follower' | 'Spell' | 'Landmark' | 'Equipment'
