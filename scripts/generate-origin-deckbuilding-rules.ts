@@ -172,9 +172,10 @@ function generateCardMeetCondition(allLorCards: RiotLoRCard[], championCode: str
 
 function generateDeckbuildingRuleText(allLorCards: RiotLoRCard[]): string {
     return championOriginRules.map((c: deckbuildingRuleParameter) => {
+        const reverseAbbreviation = Object.entries(RIOT_LOR_ORIGIN_REGION_ABBREVIATION).find(entry => entry[1] === c.abbreviation) as any[];
         return `{
             name: "${c.name}",
-            abbreviation: "${c.abbreviation}",
+            abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.${reverseAbbreviation[0]},
             doesDeckMeetCondition: (lorDeck: LoRDeck) => { ${generateDeckMeetsCondition(c.championCode)} },
             doesCardMeetCondition: (card: RiotLoRCard) => { ${generateCardMeetCondition(allLorCards, c.championCode, c.condition)} },
         }`;
@@ -187,6 +188,7 @@ function generateOriginDeckbuildingCode(allLorCards: RiotLoRCard[]) {
         // this is an auto-generated file from ${basename(__filename)}
         import {RiotLoRCard,} from "../riot-assets/models-cards";
         import {DeckbuildingRule, DeckCard, LoRDeck} from "./models";
+        import {RIOT_LOR_ORIGIN_REGION_ABBREVIATION,} from "../riot-assets/models-globals";
     
         export const originDeckbuildingRules: DeckbuildingRule[] = [
             ${generateDeckbuildingRuleText(allLorCards)}

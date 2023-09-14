@@ -1,7 +1,7 @@
 // this is an auto-generated file from generate-origin-deckbuilding-rules.ts
-import {RiotLoRCard,} from "../riot-assets/models-cards";
-import {DeckbuildingRule, DeckCard, LoRDeck} from "./models";
-import {RIOT_LOR_ORIGIN_REGION_ABBREVIATION,} from "../riot-assets/models-globals";
+import { RiotLoRCard } from "../riot-assets/models-cards";
+import { DeckbuildingRule, DeckCard, LoRDeck } from "./models";
+import { RIOT_LOR_ORIGIN_REGION_ABBREVIATION } from "../riot-assets/models-globals";
 
 export const originDeckbuildingRules: DeckbuildingRule[] = [
   {
