@@ -5,7 +5,12 @@ import {
     RiotLoRCard,
     isOriginRegionAbbreviation
 } from "../riot-assets/models-cards";
-import {RIOT_LOR_REGION_REF, RiotLorRarityRef, RiotLorRegionRef} from "../riot-assets/models-globals";
+import {
+    RIOT_LOR_KEYWORD_REF,
+    RIOT_LOR_REGION_REF,
+    RiotLorRarityRef,
+    RiotLorRegionRef
+} from "../riot-assets/models-globals";
 import {get, intersection} from "lodash";
 import {CARD_TYPE, CardType} from "./models";
 
@@ -101,13 +106,13 @@ export function getCardType(card: RiotLoRCard): CardType {
     } else if (
         card.keywordRefs &&
         card.keywordRefs.length > 0 &&
-        card.keywordRefs.includes('LandmarkVisualOnly')
+        card.keywordRefs.includes(RIOT_LOR_KEYWORD_REF.LANDMARK)
     ) {
         return CARD_TYPE.LANDMARK;
     } else if (
         card.keywordRefs &&
         card.keywordRefs.length > 0 &&
-        card.keywordRefs.includes('Equipment')
+        card.keywordRefs.includes(RIOT_LOR_KEYWORD_REF.EQUIPMENT)
     ) {
         return CARD_TYPE.EQUIPMENT;
     } else if (card.rarityRef === 'Champion') {
