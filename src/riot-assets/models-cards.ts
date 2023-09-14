@@ -16,7 +16,7 @@ export interface RiotLoRCard {
         fullAbsolutePath: string;
     }[];
     regions: string[]; // eg: ['Ionia', 'Ilhas das Sombras']
-    regionRefs: (RiotLorRegionRef | RIOT_LOR_REGION_REF | string)[]; // eg: ['BandleCity', 'ShadowIsles']
+    regionRefs: (RiotLorRegionRef | RIOT_LOR_REGION_REF)[]; // eg: ['BandleCity', 'ShadowIsles']
     attack: number; // eg: 3
     cost: number; // eg: 2
     health: number; // eg: 1
@@ -29,16 +29,16 @@ export interface RiotLoRCard {
     name: string; // eg: 'Yasuo'
     cardCode: string; // eg: '01IO015'
     keywords: string[]; // eg: ['Quick Attack', 'Formidable']
-    keywordRefs: (RiotLorKeywordRef | RIOT_LOR_KEYWORD_REF[] | string)[]; // eg: ['CantBlock', 'LastBreath']
+    keywordRefs: (RiotLorKeywordRef | RIOT_LOR_KEYWORD_REF[])[]; // eg: ['CantBlock', 'LastBreath']
     spellSpeed: string; // eg: "Rápida"
     spellSpeedRef: '' | RiotLorSpellSpeedRef | RIOT_LOR_SPELL_SPEED_REF; // eg: "Burst"
     rarity: string; // eg: 'COMUM'
-    rarityRef: (RiotLorRarityRef | RIOT_LOR_RARITY_REF | string); // eg: 'Common'
+    rarityRef: (RiotLorRarityRef | RIOT_LOR_RARITY_REF); // eg: 'Common'
     subtypes: string[]; // eg: ['CELESTIAL', 'DRAGON']. In the card game it only shows in the card the first one (this one is for the Great Beyond)
     supertype: string; // eg: 'Campeão'
     type: string; // eg: 'Feitiço'
     collectible: boolean; // eg: true
-    set: (RiotLorSet | RIOT_LOR_SET | string); // eg: 'Set1'
+    set: (RiotLorSet | RIOT_LOR_SET); // eg: 'Set1'
     formats?: string[]; // eg: ["Eterno", "Padrão" ]
     formatRefs?: (RiotLorFormat | RIOT_LOR_FORMAT)[] // eg: ["client_Formats_Eternal_name", "client_Formats_Standard_name" ]
 }

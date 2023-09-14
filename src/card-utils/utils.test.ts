@@ -13,21 +13,21 @@ import {
     teemoMock,
     twinDisciplinesMock
 } from "../mocks/card-reference.mock";
-import {RIOT_LOR_REGION_REF, RiotLorRegionRef} from "../riot-assets/models-globals";
+import {RIOT_LOR_REGION_REF} from "../riot-assets/models-globals";
 import {CARD_REGION_ABBREVIATION} from "../riot-assets/models-cards";
 import {CARD_TYPE} from "./models";
 
 describe("test card-utils utils.ts", () => {
     it("should getCardRegionAbbreviation from CardCode", () => {
-        expect(getCardRegionAbbreviation('01IO012')).toBe('IO');
+        expect(getCardRegionAbbreviation('01IO012')).toBe(CARD_REGION_ABBREVIATION.IONIA);
     });
 
     it("should getCardRegionAbbreviation from RiotLoRCard", () => {
-        expect(getCardRegionAbbreviation(twinDisciplinesMock)).toBe('IO');
+        expect(getCardRegionAbbreviation(twinDisciplinesMock)).toBe(CARD_REGION_ABBREVIATION.IONIA);
     });
 
     it("should getCardRegionRef from CardCode", () => {
-        expect(getCardRegionRef('01IO012')).toBe('Ionia');
+        expect(getCardRegionRef('01IO012')).toBe(RIOT_LOR_REGION_REF.IONIA);
     });
 
     it("should getCardRegionRef from RiotLoRCard", () => {
@@ -39,7 +39,7 @@ describe("test card-utils utils.ts", () => {
     });
 
     it("should convert valid uppercased regionRef", () => {
-        expect(regionRefToRegionAbbreviation('IONIA')).toBe(CARD_REGION_ABBREVIATION.IONIA);
+        expect(regionRefToRegionAbbreviation(RIOT_LOR_REGION_REF.IONIA)).toBe(CARD_REGION_ABBREVIATION.IONIA);
     });
 
     it("should getCardMainRegion", () => {
