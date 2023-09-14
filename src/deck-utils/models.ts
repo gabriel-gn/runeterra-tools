@@ -10,7 +10,7 @@ import {
 
 export interface DeckbuildingRule {
     name: string,
-    abbreviation: RiotLorRegionAbbreviation | RiotLorOriginRegionAbbreviation // as described in riot globals.regions
+    abbreviation: RIOT_LOR_REGION_ABBREVIATION | RIOT_LOR_ORIGIN_REGION_ABBREVIATION | RiotLorRegionAbbreviation | RiotLorOriginRegionAbbreviation // as described in riot globals.regions
     doesDeckMeetCondition: (lorDeck: LoRDeck) => boolean;
     doesCardMeetCondition: (card: RiotLoRCard) => boolean;
 }
