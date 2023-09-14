@@ -1,5 +1,9 @@
 // this is an auto-generated file from generate-riot-globals.ts
 
+import { DeckCard, LoRDeck } from "../deck-utils/models";
+import { intersection } from "lodash";
+import { RiotLoRCard } from "./models-cards";
+
 export interface RiotLoRGlobalVocabTerm {
   description: string;
   name: string;
@@ -64,6 +68,25 @@ export function isRiotLorFormat(variable: any): boolean {
   return Object.values(RIOT_LOR_FORMAT)
     .map((i) => `${i}`)
     .includes(`${variable}`);
+}
+
+export function isRiotLorStandardFormat(variable: any): boolean {
+  if (Array.isArray(variable)) {
+    return variable.some((f) => `${f}` === RIOT_LOR_FORMAT.STANDARD);
+  } else {
+    return `${variable}` === RIOT_LOR_FORMAT.STANDARD;
+  }
+}
+
+export function getRiotLorDeckFormats(deck: LoRDeck): RiotLorFormat[] {
+  const deckCards: RiotLoRCard[] = Object.keys(deck.cards)
+    // @ts-ignore
+    .map((k) => deck.cards[k].map((c: DeckCard) => c.card))
+    .flat();
+  const formatRefs: RiotLorFormat[] = intersection(
+    ...deckCards.map((c) => c.formatRefs)
+  );
+  return formatRefs;
 }
 
 export enum RIOT_LOR_KEYWORD_REF {

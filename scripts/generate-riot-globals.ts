@@ -82,6 +82,23 @@ function generateRiotLoRFormatsCode(riotGlobals: RiotLoRGlobals) {
         export function isRiotLorFormat(variable: any): boolean {
             return Object.values(${enumName}).map(i => \`\${i}\`).includes(\`\${variable}\`);
         }
+        
+        export function isRiotLorStandardFormat(variable: any): boolean {
+            if (Array.isArray(variable)) {
+                return variable.some(f => \`\${f}\` === ${enumName}.STANDARD);
+            } else {
+                return \`\${variable}\` === ${enumName}.STANDARD;
+            }
+        }
+        
+        export function getRiotLorDeckFormats(deck: LoRDeck): RiotLorFormat[] {
+            const deckCards: RiotLoRCard[] = Object.keys(deck.cards)
+                // @ts-ignore
+                .map(k => deck.cards[k].map((c: DeckCard) => c.card))
+                .flat()
+            const formatRefs: RiotLorFormat[] = intersection(...deckCards.map(c => c.formatRefs));
+            return formatRefs;
+        }
     `
 }
 
@@ -475,6 +492,10 @@ riotGlobals$.pipe(
     tap((riotGlobals: RiotLoRGlobals) => {
         let fullcontent = `
             // this is an auto-generated file from ${basename(__filename)}
+            
+            import {DeckCard, LoRDeck} from "../deck-utils/models";
+            import {intersection} from "lodash";
+            import {RiotLoRCard} from "./models-cards";
         
             ${generateRiotGlobalsInterfaceCode()}
 
