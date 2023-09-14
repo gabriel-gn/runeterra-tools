@@ -1,14 +1,16 @@
 import {
-    CARD_REGION_ABBREVIATION,
-    CardRegionAbbreviation,
-    OriginRegionAbbreviation,
     RiotLoRCard
 } from "../riot-assets/models-cards";
-import {RIOT_LOR_FORMAT, RiotLorFormat} from "../riot-assets/models-globals";
+import {
+    RIOT_LOR_FORMAT, RIOT_LOR_ORIGIN_REGION_ABBREVIATION, RIOT_LOR_REGION_ABBREVIATION,
+    RiotLorFormat,
+    RiotLorOriginRegionAbbreviation,
+    RiotLorRegionAbbreviation
+} from "../riot-assets/models-globals";
 
 export interface DeckbuildingRule {
     name: string,
-    abbreviation: CardRegionAbbreviation | OriginRegionAbbreviation // as described in riot globals.regions
+    abbreviation: RiotLorRegionAbbreviation | RiotLorOriginRegionAbbreviation // as described in riot globals.regions
     doesDeckMeetCondition: (lorDeck: LoRDeck) => boolean;
     doesCardMeetCondition: (card: RiotLoRCard) => boolean;
 }
@@ -30,8 +32,8 @@ export interface LoRDeck {
     cardCostQt: {
         [cardCost: number]: number
     };
-    mainFactions: (CardRegionAbbreviation | CARD_REGION_ABBREVIATION)[];
-    factions: (CardRegionAbbreviation | CARD_REGION_ABBREVIATION)[];
+    mainFactions: (RiotLorRegionAbbreviation | RIOT_LOR_REGION_ABBREVIATION)[];
+    factions: (RiotLorRegionAbbreviation | RIOT_LOR_ORIGIN_REGION_ABBREVIATION)[];
     essenceCost: number;
     factionCardsQt: { [faction: string]: number }; // {DE: 34, BC: 6, NX: 0, IO: 0, etc...}
     formats: (RiotLorFormat | RIOT_LOR_FORMAT)[];

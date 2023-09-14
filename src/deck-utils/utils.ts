@@ -1,15 +1,15 @@
 import {
-    CARD_REGION_ABBREVIATION,
-    CardRegionAbbreviation,
-    ORIGIN_REGION_ABBREVIATION,
-    OriginRegionAbbreviation,
     RiotLoRCard
 } from "../riot-assets/models-cards";
 import {DeckCard, LoRDeck} from "./models";
 import _ from "lodash";
 import {regionDeckbuildingRules} from "./region-deckbuilding-rules";
 import {originDeckbuildingRules} from "./origin-deckbuilding-rules";
-import {RIOT_LOR_ORIGIN_REGION_ABBREVIATION} from "../riot-assets/models-globals";
+import {
+    RIOT_LOR_ORIGIN_REGION_ABBREVIATION, RIOT_LOR_REGION_ABBREVIATION,
+    RiotLorOriginRegionAbbreviation,
+    RiotLorRegionAbbreviation
+} from "../riot-assets/models-globals";
 
 export function getAllCardsFromDeck(lorDeck: LoRDeck): DeckCard[] {
     return [].concat.apply([], Object.keys(lorDeck.cards).map((k: string) => _.get(lorDeck.cards, k)));
@@ -24,8 +24,8 @@ export function getAllCardsFromDeck(lorDeck: LoRDeck): DeckCard[] {
 export function getCardMainRegionFromDeck(
     card: RiotLoRCard,
     lorDeck?: LoRDeck,
-    factionsToConsider?: Array<CardRegionAbbreviation | OriginRegionAbbreviation>
-): CardRegionAbbreviation | OriginRegionAbbreviation {
+    factionsToConsider?: Array<RiotLorRegionAbbreviation | RiotLorOriginRegionAbbreviation>
+): RiotLorRegionAbbreviation | RiotLorOriginRegionAbbreviation {
     let originRules; // pode se encaixar em multiplas regras de origin
     factionsToConsider = factionsToConsider ? factionsToConsider : []; // caso não seja passado, considera todas
 
@@ -62,7 +62,7 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): { 
     // regionRefs = {Ionia: 0, BandleCity: 0, Evelynn: 0, ...}
     let regionAbbrvQt: { [abbrv: string]: number } = {};
     [
-        ...Object.values(CARD_REGION_ABBREVIATION),
+        ...Object.values(RIOT_LOR_REGION_ABBREVIATION),
         ...Object.values(RIOT_LOR_ORIGIN_REGION_ABBREVIATION)
     ].forEach(k => {
         regionAbbrvQt[`${k}`] = 0;
@@ -121,7 +121,7 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): { 
 
     // Re-avalia as cartas para usar apenas as regras de criação do deck
     deckCards.forEach((c: DeckCard) => {
-        const cardMainRegionAbbrv = getCardMainRegionFromDeck(c.card, undefined, mainRegions as CardRegionAbbreviation[])
+        const cardMainRegionAbbrv = getCardMainRegionFromDeck(c.card, undefined, mainRegions as RIOT_LOR_REGION_ABBREVIATION[])
         result[cardMainRegionAbbrv] += c.count;
     })
 

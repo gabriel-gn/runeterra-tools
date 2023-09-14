@@ -1,15 +1,13 @@
 import {
-    CardRegionAbbreviation,
     isRiotLoRCard,
-    CARD_REGION_ABBREVIATION,
     RiotLoRCard,
-    isOriginRegionAbbreviation
 } from "../riot-assets/models-cards";
 import {
     RIOT_LOR_KEYWORD_REF,
     RIOT_LOR_REGION_REF,
+    RIOT_LOR_REGION_ABBREVIATION,
     RiotLorRarityRef,
-    RiotLorRegionRef
+    RiotLorRegionRef, RiotLorRegionAbbreviation, isRiotLorOriginRegionAbbreviation
 } from "../riot-assets/models-globals";
 import {get, intersection} from "lodash";
 import {CARD_TYPE, CardType} from "./models";
@@ -18,12 +16,12 @@ import {CARD_TYPE, CardType} from "./models";
  * get "NX" from a card with cardCode "01NX005"
  * @param card
  */
-export function getCardRegionAbbreviation(card: RiotLoRCard | string): CardRegionAbbreviation {
+export function getCardRegionAbbreviation(card: RiotLoRCard | string): RiotLorRegionAbbreviation {
     let code = `${card}`;
     if (isRiotLoRCard(card)) {
         code = (card as RiotLoRCard).cardCode;
     }
-    return code.substring(2, 4).toUpperCase() as CardRegionAbbreviation;
+    return code.substring(2, 4).toUpperCase() as RiotLorRegionAbbreviation;
 }
 
 /**
@@ -35,7 +33,7 @@ export function getCardRegionRef(card: RiotLoRCard | string): RiotLorRegionRef {
     if (card.hasOwnProperty('cardCode')) {
         code = (card as RiotLoRCard).cardCode;
     }
-    const entry = Object.entries(CARD_REGION_ABBREVIATION).find(e => e[1] === getCardRegionAbbreviation(code));
+    const entry = Object.entries(RIOT_LOR_REGION_ABBREVIATION).find(e => e[1] === getCardRegionAbbreviation(code));
     // @ts-ignore
     return RIOT_LOR_REGION_REF[entry[0]];
 }
@@ -45,8 +43,8 @@ export function getCardRegionRef(card: RiotLoRCard | string): RiotLorRegionRef {
  * If not correctly cased, try to uppercase the enum properties to find
  * @param regionRef eg: 'PiltoverZaun' | 'Noxus' | 'Ionia' etc...
  */
-export function regionRefToRegionAbbreviation(regionRef: string): CardRegionAbbreviation {
-    let response = get(CARD_REGION_ABBREVIATION, regionRef);
+export function regionRefToRegionAbbreviation(regionRef: string): RiotLorRegionAbbreviation {
+    let response = get(RIOT_LOR_REGION_ABBREVIATION, regionRef);
     if (!response) {
         // caso dê errado, converte tudo em upper snake case e tenta achar a região
         // @ts-ignore
@@ -54,7 +52,7 @@ export function regionRefToRegionAbbreviation(regionRef: string): CardRegionAbbr
             .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
             .map(x => x.toUpperCase())
             .join('_');
-        response = CARD_REGION_ABBREVIATION[regionRef as keyof typeof CARD_REGION_ABBREVIATION] as CardRegionAbbreviation;
+        response = RIOT_LOR_REGION_ABBREVIATION[regionRef as keyof typeof RIOT_LOR_REGION_ABBREVIATION] as RiotLorRegionAbbreviation;
     }
     return response
 }
@@ -64,12 +62,12 @@ export function regionRefToRegionAbbreviation(regionRef: string): CardRegionAbbr
  * If not correctly cased, try to uppercase
  * @param regionAbbreviation eg: 'PZ' | 'NX' | 'IO' etc...
  */
-export function regionAbbreviationToRegionRef(regionAbbreviation: CardRegionAbbreviation): RiotLorRegionRef {
+export function regionAbbreviationToRegionRef(regionAbbreviation: RiotLorRegionAbbreviation): RiotLorRegionRef {
     try {
         // @ts-ignore
-        return RIOT_LOR_REGION_REF[Object.entries(CARD_REGION_ABBREVIATION).find(e => e[1] === regionAbbreviation)[0]] as RiotLorRegionRef;
+        return RIOT_LOR_REGION_REF[Object.entries(RIOT_LOR_REGION_ABBREVIATION).find(e => e[1] === regionAbbreviation)[0]] as RiotLorRegionRef;
     } catch (e) {
-        if (isOriginRegionAbbreviation(regionAbbreviation)) {
+        if (isRiotLorOriginRegionAbbreviation(regionAbbreviation)) {
             return RIOT_LOR_REGION_REF.RUNETERRA;
         } else {
             throw "could not get region abbreviation"
@@ -82,7 +80,7 @@ export function regionAbbreviationToRegionRef(regionAbbreviation: CardRegionAbbr
  * @param card
  * @param regionRefs
  */
-export function getCardMainRegion(card: RiotLoRCard, regionRefs: RiotLorRegionRef[] = []): CardRegionAbbreviation {
+export function getCardMainRegion(card: RiotLoRCard, regionRefs: RiotLorRegionRef[] = []): RiotLorRegionAbbreviation {
     let result;
     if (regionRefs.length === 0) {
         result = getCardRegionRef(card)

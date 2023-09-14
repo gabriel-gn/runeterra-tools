@@ -1,22 +1,12 @@
 // this is an auto-generated file from generate-origin-deckbuilding-rules.ts
-import {
-  CARD_REGION_ABBREVIATION,
-  ORIGIN_REGION_ABBREVIATION,
-  RiotLoRCard,
-} from "../riot-assets/models-cards";
-import { DeckbuildingRule, DeckCard, LoRDeck } from "./models";
-import {
-  RIOT_LOR_REGION_REF,
-  RIOT_LOR_SPELL_SPEED_REF,
-} from "../riot-assets/models-globals";
-import { getAllCardsFromDeck } from "./utils";
-import { CARD_TYPE } from "../card-utils/models";
-import { getCardType } from "../card-utils/utils";
+import {RiotLoRCard,} from "../riot-assets/models-cards";
+import {DeckbuildingRule, DeckCard, LoRDeck} from "./models";
+import {RIOT_LOR_ORIGIN_REGION_ABBREVIATION,} from "../riot-assets/models-globals";
 
 export const originDeckbuildingRules: DeckbuildingRule[] = [
   {
     name: "The Virtuoso",
-    abbreviation: "Jhin",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JHIN,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "06RU002"
@@ -96,7 +86,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
   },
   {
     name: "The Wandering Caretaker",
-    abbreviation: "Bard",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.BARD,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "06RU001"
@@ -124,7 +114,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
   },
   {
     name: "Agony's Embrace",
-    abbreviation: "Evelynn",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.EVELYNN,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "06RU025"
@@ -150,7 +140,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
   },
   {
     name: "The Shadow Reaper",
-    abbreviation: "Kayn",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.KAYN,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "06RU005"
@@ -189,7 +179,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
   },
   {
     name: "Grandmaster At Arms",
-    abbreviation: "Jax",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JAX,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "06RU008"
@@ -224,7 +214,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
   },
   {
     name: "The Arrow of Retribution",
-    abbreviation: "Varus",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.VARUS,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "06RU009"
@@ -263,7 +253,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
   },
   {
     name: "The Rune Mage",
-    abbreviation: "RYZE",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.RYZE,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "06RU006"
@@ -485,7 +475,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
   },
   {
     name: "The World Ender",
-    abbreviation: "Aatrox",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.AATROX,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "06RU026"
@@ -542,7 +532,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
   },
   {
     name: "Many-Shaped Jungle Friends",
-    abbreviation: "Neeko",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.NEEKO,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "07RU012"
@@ -696,7 +686,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
   },
   {
     name: "The Poro King's Decree",
-    abbreviation: "POROKING",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.PORO_KING,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
         (c: DeckCard) => c.card.cardCode === "07RU015"

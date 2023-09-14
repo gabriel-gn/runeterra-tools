@@ -1,12 +1,12 @@
 import {DeckbuildingRule, DeckCard, LoRDeck} from "./models";
-import {CARD_REGION_ABBREVIATION, RiotLoRCard} from "../riot-assets/models-cards";
-import {RIOT_LOR_REGION_REF} from "../riot-assets/models-globals";
+import {RiotLoRCard} from "../riot-assets/models-cards";
+import {RIOT_LOR_REGION_ABBREVIATION, RIOT_LOR_REGION_REF} from "../riot-assets/models-globals";
 import {getAllCardsFromDeck} from "./utils";
 
 export const regionDeckbuildingRules: DeckbuildingRule[] = [
     {
         name: 'BandleCity',
-        abbreviation: CARD_REGION_ABBREVIATION.BANDLE_CITY,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.BANDLE_CITY,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.BANDLE_CITY));
         },
@@ -16,7 +16,7 @@ export const regionDeckbuildingRules: DeckbuildingRule[] = [
     },
     {
         name: 'Bilgewater',
-        abbreviation: CARD_REGION_ABBREVIATION.BILGEWATER,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.BILGEWATER,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.BILGEWATER));
         },
@@ -26,7 +26,7 @@ export const regionDeckbuildingRules: DeckbuildingRule[] = [
     },
     {
         name: 'Demacia',
-        abbreviation: CARD_REGION_ABBREVIATION.DEMACIA,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.DEMACIA,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.DEMACIA));
         },
@@ -36,7 +36,7 @@ export const regionDeckbuildingRules: DeckbuildingRule[] = [
     },
     {
         name: 'Freljord',
-        abbreviation: CARD_REGION_ABBREVIATION.FRELJORD,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.FRELJORD,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.FRELJORD));
         },
@@ -46,7 +46,7 @@ export const regionDeckbuildingRules: DeckbuildingRule[] = [
     },
     {
         name: 'Ionia',
-        abbreviation: CARD_REGION_ABBREVIATION.IONIA,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.IONIA,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.IONIA));
         },
@@ -56,7 +56,7 @@ export const regionDeckbuildingRules: DeckbuildingRule[] = [
     },
     {
         name: 'Noxus',
-        abbreviation: CARD_REGION_ABBREVIATION.NOXUS,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.NOXUS,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.NOXUS));
         },
@@ -66,7 +66,7 @@ export const regionDeckbuildingRules: DeckbuildingRule[] = [
     },
     {
         name: 'PiltoverZaun',
-        abbreviation: CARD_REGION_ABBREVIATION.PILTOVER_ZAUN,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.PILTOVER_ZAUN,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.PILTOVER_ZAUN));
         },
@@ -76,7 +76,7 @@ export const regionDeckbuildingRules: DeckbuildingRule[] = [
     },
     {
         name: 'ShadowIsles',
-        abbreviation: CARD_REGION_ABBREVIATION.SHADOW_ISLES,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.SHADOW_ISLES,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.SHADOW_ISLES));
         },
@@ -86,7 +86,7 @@ export const regionDeckbuildingRules: DeckbuildingRule[] = [
     },
     {
         name: 'Shurima',
-        abbreviation: CARD_REGION_ABBREVIATION.SHURIMA,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.SHURIMA,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.SHURIMA));
         },
@@ -96,7 +96,7 @@ export const regionDeckbuildingRules: DeckbuildingRule[] = [
     },
     {
         name: 'Targon',
-        abbreviation: CARD_REGION_ABBREVIATION.TARGON,
+        abbreviation: RIOT_LOR_REGION_ABBREVIATION.TARGON,
         doesDeckMeetCondition: (lorDeck: LoRDeck) => {
             return getAllCardsFromDeck(lorDeck).some((c: DeckCard) => c.card.regionRefs.includes(RIOT_LOR_REGION_REF.TARGON));
         },
