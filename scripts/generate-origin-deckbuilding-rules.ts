@@ -1,22 +1,19 @@
 import {writeFileSync} from 'fs';
-import {join, basename} from 'path';
+import {basename, join} from 'path';
 import {exec} from "shelljs";
 import {
     CARD_TYPE,
-    DeckbuildingRule,
-    DeckCard,
-    getCardType,
-    LoRDeck,
-    ORIGIN_REGION_ABBREVIATION,
+    getCardType, RIOT_LOR_KEYWORD_REF,
+    RIOT_LOR_ORIGIN_REGION_ABBREVIATION,
     RIOT_LOR_SPELL_SPEED_REF,
     RiotLoRCard
 } from "../src";
-import axios, {AxiosResponse} from 'axios';
-import {from, map, Observable, tap} from "rxjs";
+import axios from 'axios';
+import {from, map, tap} from "rxjs";
 
 interface deckbuildingRuleParameter {
     name: string,
-    abbreviation: ORIGIN_REGION_ABBREVIATION,
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION,
     championCode: string,
     condition: (card: RiotLoRCard) => boolean
 }
@@ -36,18 +33,18 @@ const allLorCards$ = from(axios.get(`https://api.lordecks.com/riot-assets/cards`
 const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'The Virtuoso',
-        abbreviation: ORIGIN_REGION_ABBREVIATION.JHIN,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JHIN,
         championCode: '06RU002',
         condition: (card: RiotLoRCard) => {
             // Jhin can put in deck any follower with skill
             return getCardType(card) === CARD_TYPE.FOLLOWER
                 && card?.associatedCards
-                && card?.associatedCards?.some((c: RiotLoRCard) => c.keywordRefs.includes('Skill'));
+                && card?.associatedCards?.some((c: RiotLoRCard) => c.keywordRefs.includes(RIOT_LOR_KEYWORD_REF.SKILL));
         },
     },
     {
         name: 'The Wandering Caretaker',
-        abbreviation: ORIGIN_REGION_ABBREVIATION.BARD,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.BARD,
         championCode: '06RU001',
         condition: (card: RiotLoRCard) => {
             // 06RU001T3 is "chime"'s code
@@ -56,7 +53,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     },
     {
         name: 'Agony\'s Embrace',
-        abbreviation: ORIGIN_REGION_ABBREVIATION.EVELYNN,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.EVELYNN,
         championCode: '06RU025',
         condition: (card: RiotLoRCard) => {
             // List all husk invoking cards
@@ -65,7 +62,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     },
     {
         name: 'The Shadow Reaper',
-        abbreviation: ORIGIN_REGION_ABBREVIATION.KAYN,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.KAYN,
         championCode: '06RU005',
         condition: (card: RiotLoRCard) => {
             // "CULTIST" is kayn's deckbuilding condition
@@ -77,7 +74,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     },
     {
         name: 'Grandmaster At Arms',
-        abbreviation: ORIGIN_REGION_ABBREVIATION.JAX,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JAX,
         championCode: '06RU008',
         condition: (card: RiotLoRCard) => {
             // "WEAPONMASTER" is jax's deckbuilding condition
@@ -89,7 +86,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     },
     {
         name: 'The Arrow of Retribution',
-        abbreviation: ORIGIN_REGION_ABBREVIATION.VARUS,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.VARUS,
         championCode: '06RU009',
         condition: (card: RiotLoRCard) => {
             // "CULTIST" is varus's deckbuilding condition
@@ -101,17 +98,17 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     },
     {
         name: 'The Rune Mage',
-        abbreviation: ORIGIN_REGION_ABBREVIATION.RYZE,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.RYZE,
         championCode: '06RU006',
         condition: (card: RiotLoRCard) => {
             return card.spellSpeedRef === RIOT_LOR_SPELL_SPEED_REF.BURST
-            && card.description.includes('ally') === false
-            && card.description.includes('enemy') === false
+                && card.description.includes('ally') === false
+                && card.description.includes('enemy') === false
         },
     },
     {
         name: 'The World Ender',
-        abbreviation: ORIGIN_REGION_ABBREVIATION.AATROX,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.AATROX,
         championCode: '06RU026',
         condition: (card: RiotLoRCard) => {
             // "DARKIN" is aatrox's deckbuilding condition
@@ -123,7 +120,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     },
     {
         name: 'Many-Shaped Jungle Friends',
-        abbreviation: ORIGIN_REGION_ABBREVIATION.NEEKO,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.NEEKO,
         championCode: '07RU012',
         condition: (card: RiotLoRCard) => {
             const neekoSubtypes = [
@@ -141,7 +138,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     },
     {
         name: "The Poro King's Decree",
-        abbreviation: ORIGIN_REGION_ABBREVIATION.POROKING,
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.PORO_KING,
         championCode: '07RU015',
         condition: (card: RiotLoRCard) => {
             const kingPoroSubtypes = [
@@ -150,7 +147,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
             return card.name.toUpperCase().includes('PORO') // has poro on name
                 || (card.subtypes.some(s => kingPoroSubtypes.some(d => d.includes(s.toUpperCase())))) // is poro subtype
                 || card.associatedCardRefs.includes('01FR016') // has poro snax as associated card
-            ;
+                ;
         },
     },
 ];
@@ -163,11 +160,11 @@ function generateCardMeetCondition(allLorCards: RiotLoRCard[], championCode: str
     return `
         const champion${championCode}Cards = [
         ${[...new Set(
-            allLorCards
+        allLorCards
             .filter(c => condition(c))
             .map(c => `"${c.cardCode}"`)
             .concat(`"${championCode}"`)
-        )]}
+    )]}
         ];
         return champion${championCode}Cards.includes(card.cardCode);
     `
@@ -175,9 +172,10 @@ function generateCardMeetCondition(allLorCards: RiotLoRCard[], championCode: str
 
 function generateDeckbuildingRuleText(allLorCards: RiotLoRCard[]): string {
     return championOriginRules.map((c: deckbuildingRuleParameter) => {
+        const reverseAbbreviation = Object.entries(RIOT_LOR_ORIGIN_REGION_ABBREVIATION).find(entry => entry[1] === c.abbreviation) as any[];
         return `{
             name: "${c.name}",
-            abbreviation: "${c.abbreviation}",
+            abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.${reverseAbbreviation[0]},
             doesDeckMeetCondition: (lorDeck: LoRDeck) => { ${generateDeckMeetsCondition(c.championCode)} },
             doesCardMeetCondition: (card: RiotLoRCard) => { ${generateCardMeetCondition(allLorCards, c.championCode, c.condition)} },
         }`;
@@ -188,18 +186,15 @@ function generateOriginDeckbuildingCode(allLorCards: RiotLoRCard[]) {
     const filepath = join(__dirname, '../src/deck-utils/origin-deckbuilding-rules.ts');
     writeFileSync(filepath, `
         // this is an auto-generated file from ${basename(__filename)}
-        import {CARD_REGION_ABBREVIATION, ORIGIN_REGION_ABBREVIATION, RiotLoRCard} from "../riot-assets/models-cards";
+        import {RiotLoRCard,} from "../riot-assets/models-cards";
         import {DeckbuildingRule, DeckCard, LoRDeck} from "./models";
-        import {RIOT_LOR_REGION_REF, RIOT_LOR_SPELL_SPEED_REF} from "../riot-assets/models-globals";
-        import {getAllCardsFromDeck} from "./utils";
-        import {CARD_TYPE} from "../card-utils/models";
-        import {getCardType} from "../card-utils/utils";
+        import {RIOT_LOR_ORIGIN_REGION_ABBREVIATION,} from "../riot-assets/models-globals";
     
         export const originDeckbuildingRules: DeckbuildingRule[] = [
             ${generateDeckbuildingRuleText(allLorCards)}
         ]
     `
-    , {flag: 'w'});
+        , {flag: 'w'});
     exec(`npx prettier --write ${filepath}`)
 }
 

@@ -2,12 +2,6 @@ import {writeFileSync} from 'fs';
 import {join, basename} from 'path';
 import {exec} from "shelljs";
 import {
-    CARD_TYPE,
-    DeckbuildingRule,
-    DeckCard,
-    getCardType,
-    LoRDeck,
-    ORIGIN_REGION_ABBREVIATION,
     RIOT_LOR_SPELL_SPEED_REF,
 } from "../src";
 import axios, {AxiosResponse} from 'axios';
