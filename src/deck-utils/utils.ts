@@ -9,6 +9,7 @@ import {DeckCard, LoRDeck} from "./models";
 import _ from "lodash";
 import {regionDeckbuildingRules} from "./region-deckbuilding-rules";
 import {originDeckbuildingRules} from "./origin-deckbuilding-rules";
+import {RIOT_LOR_ORIGIN_REGION_ABBREVIATION} from "../riot-assets/models-globals";
 
 export function getAllCardsFromDeck(lorDeck: LoRDeck): DeckCard[] {
     return [].concat.apply([], Object.keys(lorDeck.cards).map((k: string) => _.get(lorDeck.cards, k)));
@@ -62,7 +63,7 @@ export function getDeckMainRegions(lorDeck: LoRDeck, maxRegions: number = 2): { 
     let regionAbbrvQt: { [abbrv: string]: number } = {};
     [
         ...Object.values(CARD_REGION_ABBREVIATION),
-        ...Object.values(ORIGIN_REGION_ABBREVIATION)
+        ...Object.values(RIOT_LOR_ORIGIN_REGION_ABBREVIATION)
     ].forEach(k => {
         regionAbbrvQt[`${k}`] = 0;
     });
