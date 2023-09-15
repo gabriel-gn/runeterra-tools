@@ -29,7 +29,7 @@ export interface RiotLoRCard {
     name: string; // eg: 'Yasuo'
     cardCode: string; // eg: '01IO015'
     keywords: string[]; // eg: ['Quick Attack', 'Formidable']
-    keywordRefs: (RiotLorKeywordRef | RIOT_LOR_KEYWORD_REF[])[]; // eg: ['CantBlock', 'LastBreath']
+    keywordRefs: (RiotLorKeywordRef | RIOT_LOR_KEYWORD_REF)[]; // eg: ['CantBlock', 'LastBreath']
     spellSpeed: string; // eg: "Rápida"
     spellSpeedRef: '' | RiotLorSpellSpeedRef | RIOT_LOR_SPELL_SPEED_REF; // eg: "Burst"
     rarity: string; // eg: 'COMUM'
