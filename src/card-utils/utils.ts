@@ -7,7 +7,7 @@ import {
     RIOT_LOR_REGION_REF,
     RIOT_LOR_REGION_ABBREVIATION,
     RiotLorRarityRef,
-    RiotLorRegionRef, RiotLorRegionAbbreviation, isRiotLorOriginRegionAbbreviation
+    RiotLorRegionRef, RiotLorRegionAbbreviation, isRiotLorOriginRegionAbbreviation, RIOT_LOR_RARITY_REF
 } from "../riot-assets/models-globals";
 import {get, intersection} from "lodash";
 import {CARD_TYPE, CardType} from "./models";
@@ -113,7 +113,7 @@ export function getCardType(card: RiotLoRCard): CardType {
         card.keywordRefs.includes(RIOT_LOR_KEYWORD_REF.EQUIPMENT)
     ) {
         return CARD_TYPE.EQUIPMENT;
-    } else if (card.rarityRef === 'Champion') {
+    } else if ((card.rarityRef === RIOT_LOR_RARITY_REF.CHAMPION) || (!!card.supertype)) {
         return CARD_TYPE.CHAMPION;
     } else {
         return CARD_TYPE.FOLLOWER;
