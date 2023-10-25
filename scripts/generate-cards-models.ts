@@ -76,6 +76,7 @@ function generateCardTypeCode(): string {
             SPELL = 'Spell',
             LANDMARK = 'Landmark',
             EQUIPMENT = 'Equipment',
+            ABILITY = 'Ability',
         }
         
         export type CardType = 
@@ -84,6 +85,7 @@ function generateCardTypeCode(): string {
             | \`\${CARD_TYPE.SPELL}\`
             | \`\${CARD_TYPE.LANDMARK}\`
             | \`\${CARD_TYPE.EQUIPMENT}\`
+            | \`\${CARD_TYPE.ABILITY}\`
         
         export function isCardType(variable: any): boolean {
             return Object.values(CARD_TYPE).map(i => \`\${i}\`).includes(\`\${variable}\`);

@@ -99,18 +99,22 @@ export function getCardMainRegion(card: RiotLoRCard, regionRefs: RiotLorRegionRe
  * @param card
  */
 export function getCardType(card: RiotLoRCard): CardType {
-    if (!!card.spellSpeedRef) {
+    if (['ability', 'trap'].includes(card.type.toLowerCase())) {
+        return CARD_TYPE.ABILITY
+    } else if (!!card.spellSpeedRef || card.type === 'Spell') {
         return CARD_TYPE.SPELL;
     } else if (
-        card.keywordRefs &&
+        (card.keywordRefs &&
         card.keywordRefs.length > 0 &&
-        card.keywordRefs.includes(RIOT_LOR_KEYWORD_REF.LANDMARK)
+        card.keywordRefs.includes(RIOT_LOR_KEYWORD_REF.LANDMARK))
+        || card.type === 'Landmark'
     ) {
         return CARD_TYPE.LANDMARK;
     } else if (
-        card.keywordRefs &&
+        (card.keywordRefs &&
         card.keywordRefs.length > 0 &&
-        card.keywordRefs.includes(RIOT_LOR_KEYWORD_REF.EQUIPMENT)
+        card.keywordRefs.includes(RIOT_LOR_KEYWORD_REF.EQUIPMENT))
+        || card.type === 'Equipment'
     ) {
         return CARD_TYPE.EQUIPMENT;
     } else if ((card.rarityRef === RIOT_LOR_RARITY_REF.CHAMPION) || (!!card.supertype)) {
