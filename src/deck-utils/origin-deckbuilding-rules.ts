@@ -9,14 +9,13 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JHIN,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "06RU002"
+        (c: DeckCard) => c.card.cardCode === "06RU002",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
       const champion06RU002Cards = [
         "01IO056",
         "01IO033",
-        "01NX006T1",
         "01NX046",
         "01NX040",
         "01PZ013",
@@ -32,17 +31,12 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
         "02BW056",
         "02BW060",
         "02BW028",
-        "02BW032T3",
-        "02BW022T2",
-        "02BW026T3",
         "02NX004",
-        "02IO006T1",
         "03NX017",
         "03DE004",
         "03FR003",
         "03MT001",
         "03MT220",
-        "03MT054T1",
         "03SI006",
         "04PZ005",
         "04PZ005T1",
@@ -50,26 +44,19 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
         "04BW007",
         "04BW016",
         "04SH089",
-        "04SH067T1",
-        "04SH067T4",
         "04SH009",
         "04SH097",
         "04SI007",
         "04SI012",
         "04MT013",
-        "05BC163T1",
         "05FR006",
         "05PZ031",
         "05PZ014",
         "06NX024",
         "06NX013",
         "06NX009",
-        "06RU002T1",
-        "06RU002T5",
         "06IO004",
         "06IO003",
-        "06SH009T2",
-        "06SI012T1",
         "06MT018",
         "06BC051",
         "06IO015",
@@ -79,6 +66,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
         "07IO023",
         "07SH009",
         "07SH003",
+        "08NX024",
         "06RU002",
       ];
       return champion06RU002Cards.includes(card.cardCode);
@@ -89,7 +77,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.BARD,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "06RU001"
+        (c: DeckCard) => c.card.cardCode === "06RU001",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
@@ -117,7 +105,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.EVELYNN,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "06RU025"
+        (c: DeckCard) => c.card.cardCode === "06RU025",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
@@ -143,7 +131,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.KAYN,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "06RU005"
+        (c: DeckCard) => c.card.cardCode === "06RU005",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
@@ -182,7 +170,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JAX,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "06RU008"
+        (c: DeckCard) => c.card.cardCode === "06RU008",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
@@ -217,7 +205,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.VARUS,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "06RU009"
+        (c: DeckCard) => c.card.cardCode === "06RU009",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
@@ -256,7 +244,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.RYZE,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "06RU006"
+        (c: DeckCard) => c.card.cardCode === "06RU006",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
@@ -325,6 +313,8 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
         "03IO002T5",
         "03FR018",
         "03FR019",
+        "04PZ001T2",
+        "04PZ011",
         "04PZ007",
         "04BW014",
         "04BW008",
@@ -464,10 +454,16 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
         "07MT013",
         "07MT013T1",
         "07MT013T2",
+        "08SI026T1",
         "08BW008T3",
         "08BW008T5",
         "08BW032",
         "08BW002",
+        "08RU014T8",
+        "08RU015",
+        "08NX019T1",
+        "08MT003T11",
+        "08DE017T1",
         "06RU006",
       ];
       return champion06RU006Cards.includes(card.cardCode);
@@ -478,7 +474,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.AATROX,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "06RU026"
+        (c: DeckCard) => c.card.cardCode === "06RU026",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
@@ -535,7 +531,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.NEEKO,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "07RU012"
+        (c: DeckCard) => c.card.cardCode === "07RU012",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
@@ -678,6 +674,9 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
         "07BC011",
         "07DE015",
         "08PZ026T1",
+        "08FR024",
+        "08NX019",
+        "08SH012",
         "08MT027",
         "07RU012",
       ];
@@ -689,7 +688,7 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
     abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.PORO_KING,
     doesDeckMeetCondition: (lorDeck: LoRDeck) => {
       return lorDeck.cards.champions.some(
-        (c: DeckCard) => c.card.cardCode === "07RU015"
+        (c: DeckCard) => c.card.cardCode === "07RU015",
       );
     },
     doesCardMeetCondition: (card: RiotLoRCard) => {
@@ -724,6 +723,218 @@ export const originDeckbuildingRules: DeckbuildingRule[] = [
         "07RU015T4",
       ];
       return champion07RU015Cards.includes(card.cardCode);
+    },
+  },
+  {
+    name: "Aspect of the Dragon",
+    abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.ELDER_DRAGON,
+    doesDeckMeetCondition: (lorDeck: LoRDeck) => {
+      return lorDeck.cards.champions.some(
+        (c: DeckCard) => c.card.cardCode === "08RU014",
+      );
+    },
+    doesCardMeetCondition: (card: RiotLoRCard) => {
+      const champion08RU014Cards = [
+        "01IO056",
+        "01IO016",
+        "01IO033",
+        "01IO021",
+        "01IO031",
+        "01IO030",
+        "01NX051",
+        "01NX036",
+        "01NX044",
+        "01NX045",
+        "01DE002",
+        "01DE052",
+        "01DE051",
+        "01PZ013",
+        "01PZ056T5",
+        "01PZ056T6",
+        "01PZ048",
+        "01PZ015",
+        "01PZ035",
+        "01PZ014T1",
+        "01PZ006",
+        "01FR026",
+        "01FR013",
+        "01FR043",
+        "01FR052",
+        "01FR056",
+        "01FR031",
+        "01FR043T1",
+        "01FR034",
+        "01SI035",
+        "01SI005",
+        "01SI033",
+        "01SI044",
+        "01SI020",
+        "01SI055",
+        "02PZ002",
+        "02BW056",
+        "02BW030",
+        "02BW017",
+        "02BW035",
+        "02BW028",
+        "02BW002",
+        "02BW050",
+        "02BW015",
+        "02FR008",
+        "02NX001",
+        "02NX002",
+        "02NX010",
+        "02DE010",
+        "02SI003",
+        "02SI002",
+        "02IO004",
+        "03NX002",
+        "03NX017",
+        "03BW003",
+        "03BW017",
+        "03DE004",
+        "03FR003",
+        "03MT083",
+        "03MT022",
+        "03MT059",
+        "03MT037",
+        "03MT010",
+        "03MT059T1",
+        "03MT021",
+        "03MT006",
+        "03MT100",
+        "03MT012",
+        "03MT033",
+        "03DE003",
+        "03DE013",
+        "03DE007",
+        "03FR017",
+        "03FR006T1",
+        "03FR011",
+        "04BW007",
+        "04IO002",
+        "04IO013",
+        "04SH015",
+        "04SH003T8",
+        "04SH057",
+        "04SH034",
+        "04SH097",
+        "04SH022",
+        "04SH046",
+        "04SH137",
+        "04FR001T1",
+        "04FR005T4",
+        "04FR018",
+        "04NX008",
+        "04NX007",
+        "04SI007",
+        "04SI053",
+        "04MT002",
+        "04DE004",
+        "04DE005",
+        "04DE010",
+        "04DE016",
+        "04DE013",
+        "05BC010",
+        "05BC023",
+        "05BC023T1",
+        "05BC086",
+        "05BC148",
+        "05BC190",
+        "05BC151",
+        "05BC179",
+        "05BC105",
+        "05BC177",
+        "05BC177T2",
+        "05BC177T1",
+        "05BC079",
+        "05BC070",
+        "05BC006",
+        "05BC188",
+        "05FR002",
+        "05FR002T1",
+        "05FR012",
+        "05FR014",
+        "05IO020",
+        "05IO007",
+        "05SH012T1",
+        "05NX009",
+        "05BW004",
+        "05PZ031",
+        "05PZ014",
+        "05SI008",
+        "05SI010",
+        "05MT004",
+        "05DE003",
+        "06NX024",
+        "06NX012T1",
+        "06NX028T1",
+        "06MT038",
+        "06FR028",
+        "06BC031",
+        "06BW011",
+        "06SH014",
+        "06SH016",
+        "06DE038",
+        "06DE036",
+        "06SI013",
+        "06NX020T1",
+        "06NX044",
+        "06MT035",
+        "06MT035T1",
+        "06MT006T2",
+        "06MT018",
+        "06FR018T1",
+        "06FR040",
+        "06FR027",
+        "06FR023",
+        "06BC029T1",
+        "06BC024",
+        "06IO044",
+        "06IO023T1",
+        "06PZ008T2",
+        "06PZ036",
+        "06BW014T1",
+        "06SH021",
+        "06SH055",
+        "06SH004T2",
+        "06DE028",
+        "06SI007T1",
+        "07NX005",
+        "07BW040T2",
+        "07BW004",
+        "07IO023",
+        "07IO047",
+        "07SH023",
+        "07FR008T1",
+        "07SH043",
+        "07SH005",
+        "07FR010",
+        "07SI010",
+        "07BC011",
+        "07DE015",
+        "08SI037T1",
+        "08SI037",
+        "08BW015",
+        "08BW009",
+        "08BW031",
+        "08PZ028",
+        "08PZ006",
+        "08FR015",
+        "08FR030",
+        "08FR003",
+        "08NX003",
+        "08MT005",
+        "08MT030",
+        "08MT027",
+        "08DE025",
+        "08DE022",
+        "08DE026",
+        "08IO012",
+        "08IO014",
+        "08BC004",
+        "08RU014",
+      ];
+      return champion08RU014Cards.includes(card.cardCode);
     },
   },
 ];

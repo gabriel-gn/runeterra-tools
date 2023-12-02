@@ -84,7 +84,7 @@ export function getRiotLorDeckFormats(deck: LoRDeck): RiotLorFormat[] {
     .map((k) => deck.cards[k].map((c: DeckCard) => c.card))
     .flat();
   const formatRefs: RiotLorFormat[] = intersection(
-    ...deckCards.map((c) => c.formatRefs)
+    ...deckCards.map((c) => c.formatRefs),
   );
   return formatRefs;
 }
@@ -105,7 +105,9 @@ export enum RIOT_LOR_KEYWORD_REF {
   CAPTURE = "Capture",
   CHALLENGER = "Challenger",
   COUNTDOWN = "Countdown",
+  CURSE = "Curse",
   DAYBREAK = "Daybreak",
+  DEATHLESS = "Deathless",
   DEEP = "Deep",
   DEMACIA = "Demacia",
   DOUBLE_ATTACK = "DoubleStrike",
@@ -180,7 +182,9 @@ export type RiotLorKeywordRef =
   | RIOT_LOR_KEYWORD_REF.CAPTURE
   | RIOT_LOR_KEYWORD_REF.CHALLENGER
   | RIOT_LOR_KEYWORD_REF.COUNTDOWN
+  | RIOT_LOR_KEYWORD_REF.CURSE
   | RIOT_LOR_KEYWORD_REF.DAYBREAK
+  | RIOT_LOR_KEYWORD_REF.DEATHLESS
   | RIOT_LOR_KEYWORD_REF.DEEP
   | RIOT_LOR_KEYWORD_REF.DEMACIA
   | RIOT_LOR_KEYWORD_REF.DOUBLE_ATTACK
@@ -334,6 +338,7 @@ export function isRiotLorRegionAbbreviation(variable: any): boolean {
 export enum RIOT_LOR_ORIGIN_REGION_REF {
   AATROX = "Aatrox",
   BARD = "Bard",
+  ELDER_DRAGON = "ElderDragon",
   EVELYNN = "Evelynn",
   JAX = "Jax",
   JHIN = "Jhin",
@@ -347,6 +352,7 @@ export enum RIOT_LOR_ORIGIN_REGION_REF {
 export type RiotLorOriginRegionRef =
   | RIOT_LOR_ORIGIN_REGION_REF.AATROX
   | RIOT_LOR_ORIGIN_REGION_REF.BARD
+  | RIOT_LOR_ORIGIN_REGION_REF.ELDER_DRAGON
   | RIOT_LOR_ORIGIN_REGION_REF.EVELYNN
   | RIOT_LOR_ORIGIN_REGION_REF.JAX
   | RIOT_LOR_ORIGIN_REGION_REF.JHIN
@@ -365,6 +371,7 @@ export function isRiotLorOriginRegionRef(variable: any): boolean {
 export enum RIOT_LOR_ORIGIN_REGION_ABBREVIATION {
   AATROX = "Aatrox",
   BARD = "Bard",
+  ELDER_DRAGON = "ELD",
   EVELYNN = "Evelynn",
   JAX = "Jax",
   JHIN = "Jhin",
@@ -378,6 +385,7 @@ export enum RIOT_LOR_ORIGIN_REGION_ABBREVIATION {
 export type RiotLorOriginRegionAbbreviation =
   | RIOT_LOR_ORIGIN_REGION_ABBREVIATION.AATROX
   | RIOT_LOR_ORIGIN_REGION_ABBREVIATION.BARD
+  | RIOT_LOR_ORIGIN_REGION_ABBREVIATION.ELDER_DRAGON
   | RIOT_LOR_ORIGIN_REGION_ABBREVIATION.EVELYNN
   | RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JAX
   | RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JHIN
@@ -472,7 +480,7 @@ export enum RIOT_LOR_VOCAB_TERM {
   ORIGIN = "Origin",
   PHASE = "Phase",
   PLAY = "Play",
-  POWER = "Power",
+  POWER = "PathPower",
   PREDICT = "Predict",
   RALLY = "Rally",
   REFORGE = "Reforge",
@@ -519,6 +527,7 @@ export type RiotLorVocabTerm =
   | RIOT_LOR_VOCAB_TERM.ORIGIN
   | RIOT_LOR_VOCAB_TERM.PHASE
   | RIOT_LOR_VOCAB_TERM.PLAY
+  | RIOT_LOR_VOCAB_TERM.POWER
   | RIOT_LOR_VOCAB_TERM.POWER
   | RIOT_LOR_VOCAB_TERM.PREDICT
   | RIOT_LOR_VOCAB_TERM.RALLY

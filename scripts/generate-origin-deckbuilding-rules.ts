@@ -2,7 +2,7 @@ import {writeFileSync} from 'fs';
 import {basename, join} from 'path';
 import {exec} from "shelljs";
 import {
-    CARD_TYPE,
+    CARD_TYPE, CHAMPION_CARD_CODE,
     getCardType, RIOT_LOR_KEYWORD_REF,
     RIOT_LOR_ORIGIN_REGION_ABBREVIATION,
     RIOT_LOR_SPELL_SPEED_REF,
@@ -34,7 +34,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'The Virtuoso',
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JHIN,
-        championCode: '06RU002',
+        championCode: CHAMPION_CARD_CODE.JHIN,
         condition: (card: RiotLoRCard) => {
             // Jhin can put in deck any follower with skill
             return getCardType(card) === CARD_TYPE.FOLLOWER
@@ -45,7 +45,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'The Wandering Caretaker',
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.BARD,
-        championCode: '06RU001',
+        championCode: CHAMPION_CARD_CODE.BARD,
         condition: (card: RiotLoRCard) => {
             // 06RU001T3 is "chime"'s code
             return card.associatedCardRefs.includes('06RU001T3');
@@ -54,7 +54,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'Agony\'s Embrace',
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.EVELYNN,
-        championCode: '06RU025',
+        championCode: CHAMPION_CARD_CODE.EVELYNN,
         condition: (card: RiotLoRCard) => {
             // List all husk invoking cards
             return card.description.toLowerCase().includes('husk');
@@ -63,7 +63,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'The Shadow Reaper',
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.KAYN,
-        championCode: '06RU005',
+        championCode: CHAMPION_CARD_CODE.KAYN,
         condition: (card: RiotLoRCard) => {
             // "CULTIST" is kayn's deckbuilding condition
             const cultistSubtypeLanguages = [
@@ -75,7 +75,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'Grandmaster At Arms',
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.JAX,
-        championCode: '06RU008',
+        championCode: CHAMPION_CARD_CODE.JAX,
         condition: (card: RiotLoRCard) => {
             // "WEAPONMASTER" is jax's deckbuilding condition
             const weaponmasterSubtypeLanguages = [
@@ -87,7 +87,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'The Arrow of Retribution',
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.VARUS,
-        championCode: '06RU009',
+        championCode: CHAMPION_CARD_CODE.VARUS,
         condition: (card: RiotLoRCard) => {
             // "CULTIST" is varus's deckbuilding condition
             const cultistSubtypeLanguages = [
@@ -99,7 +99,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'The Rune Mage',
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.RYZE,
-        championCode: '06RU006',
+        championCode: CHAMPION_CARD_CODE.RYZE,
         condition: (card: RiotLoRCard) => {
             return card.spellSpeedRef === RIOT_LOR_SPELL_SPEED_REF.BURST
                 && card.description.includes('ally') === false
@@ -109,7 +109,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'The World Ender',
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.AATROX,
-        championCode: '06RU026',
+        championCode: CHAMPION_CARD_CODE.AATROX,
         condition: (card: RiotLoRCard) => {
             // "DARKIN" is aatrox's deckbuilding condition
             const darkinSubtypeLanguages = [
@@ -121,7 +121,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: 'Many-Shaped Jungle Friends',
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.NEEKO,
-        championCode: '07RU012',
+        championCode: CHAMPION_CARD_CODE.NEEKO,
         condition: (card: RiotLoRCard) => {
             const neekoSubtypes = [
                 'BIRD',
@@ -139,7 +139,7 @@ const championOriginRules: deckbuildingRuleParameter[] = [
     {
         name: "The Poro King's Decree",
         abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.PORO_KING,
-        championCode: '07RU015',
+        championCode: CHAMPION_CARD_CODE.THE_PORO_KING,
         condition: (card: RiotLoRCard) => {
             const kingPoroSubtypes = [
                 'PORO',
@@ -147,7 +147,17 @@ const championOriginRules: deckbuildingRuleParameter[] = [
             return card.name.toUpperCase().includes('PORO') // has poro on name
                 || (card.subtypes.some(s => kingPoroSubtypes.some(d => d.includes(s.toUpperCase())))) // is poro subtype
                 || card.associatedCardRefs.includes('01FR016') // has poro snax as associated card
-                ;
+            ;
+        },
+    },
+    {
+        name: "Aspect of the Dragon",
+        abbreviation: RIOT_LOR_ORIGIN_REGION_ABBREVIATION.ELDER_DRAGON,
+        championCode: CHAMPION_CARD_CODE.ELDER_DRAGON,
+        condition: (card: RiotLoRCard) => {
+            return getCardType(card) === CARD_TYPE.FOLLOWER
+                && card.cost >= 6
+            ;
         },
     },
 ];
