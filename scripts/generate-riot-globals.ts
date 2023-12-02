@@ -153,11 +153,15 @@ function generateRiotLoRKeywordRefCode(riotGlobals: RiotLoRGlobals) {
 function generateRiotLoRRaritiesCode(riotGlobals: RiotLoRGlobals) {
     const enumName = `RIOT_LOR_RARITY_REF`;
     const typeName = `RiotLorRarityRef`;
-    const rarities = riotGlobals.rarities.sort((a, b) => {
-        if (a.name < b.name) { return -1; }
-        if (a.name > b.name) { return 1; }
-        return 0;
-    });
+    const ignoreNameRefList = ['PathPower'];
+    const rarities = riotGlobals.rarities
+        .sort((a, b) => {
+            if (a.name < b.name) { return -1; }
+            if (a.name > b.name) { return 1; }
+            return 0;
+        })
+        .filter(r => ignoreNameRefList.includes(r.nameRef) === false)
+    ;
     return `
         export enum ${enumName} {
         ${rarities.map(rarity => {
