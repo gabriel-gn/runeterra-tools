@@ -27,7 +27,7 @@ export interface LoRMatchPlayer {
   deck_id: string;
   deck_code: string;
   factions: string[];
-  game_outcome: string;
+  game_outcome: 'win' | 'loss' | 'tie';
   order_of_play: number;
 }
 
@@ -37,9 +37,9 @@ export interface LoRMatchExtendedPlayer extends LoRMatchPlayer {
 }
 
 export interface LoRMatchInfo {
-  game_mode: string;
-  game_type: string;
-  game_start_time_utc: Date;
+  game_mode: 'Constructed' | 'AI' | 'ThePathOfChampions' | string;
+  game_type: 'Ranked' | string;
+  game_start_time_utc: string;
   game_version: string;
   players: (LoRMatchPlayer | LoRMatchExtendedPlayer)[];
   total_turn_count: number;
