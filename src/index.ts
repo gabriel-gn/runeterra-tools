@@ -10,3 +10,4 @@ export * from './deck-utils/origin-deckbuilding-rules';
 
 export * from './riot-assets/models-globals';
 export * from './riot-assets/models-cards';
+export * from './riot-assets/models-matches';
