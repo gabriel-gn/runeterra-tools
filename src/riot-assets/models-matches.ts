@@ -41,7 +41,7 @@ export interface LoRMatchInfo {
   game_type: string;
   game_start_time_utc: Date;
   game_version: string;
-  players: LoRMatchPlayer[];
+  players: (LoRMatchPlayer | LoRMatchExtendedPlayer)[];
   total_turn_count: number;
 }
 
