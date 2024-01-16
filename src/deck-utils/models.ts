@@ -69,4 +69,5 @@ export interface UserDeck {
     username: string;
     deck: LoRDeck;
     relatedDecks?: LoRDeck[];
+    thumbnail?: string;
 }
